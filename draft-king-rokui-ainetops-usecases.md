@@ -9,9 +9,11 @@ v: 3
 area: AREA
 workgroup: WG Working Group
 keyword:
- - next generation
- - unicorn
- - sparkling distributed ledger
+ - Artificial Intelligence 
+ - Machine Learning
+ - AI
+ - ML
+ - Use Cases
 venue:
   group: WG
   type: Working Group
