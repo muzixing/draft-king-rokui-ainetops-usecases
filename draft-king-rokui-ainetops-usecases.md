@@ -1,26 +1,21 @@
 ---
+title: "Artificial Intelligence (AI) for Network Operations"
+abbrev: "AINetOps Use Cases"
+category: info
 
-docname: draft-king-rokui-ainetops-usecases.md
+docname: draft-king-rokui-ainetops-usecases-00
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
 consensus: true
 v: 3
 area: AREA
-workgroup: WG Working Group
+workgroup: "RTG"
 keyword:
- - Artificial Intelligence 
- - Machine Learning
  - AI
  - ML
+ - Artificial Intelligence
  - Use Cases
-venue:
-  group: WG
-  type: Working Group
-  mail: WG@example.com
-  arch: https://example.com/WG
-  github: USER/REPO
-  latest: https://example.com/LATEST
 
 author:
 -
@@ -31,7 +26,6 @@ author:
   fullname: Reza Rokui
   organization: Ciena
   email: rrokui@ciena.com
--
 
 contributor:
 -
