@@ -18,14 +18,18 @@ keyword:
  - Use Cases
 
 author:
--
-  fullname: Daniel King
-  organization: Lancaster University
-  email: d.king@lancaster.ac.uk
 - 
   fullname: Reza Rokui
   organization: Ciena
   email: rrokui@ciena.com
+- 
+  fullname: Cheng Li
+  organization: Huawei
+  email: c.l@huawei.com
+-
+  fullname: Daniel King
+  organization: Lancaster University
+  email: d.king@lancaster.ac.uk
 
 contributor:
 -
@@ -302,6 +306,8 @@ Section 5.4.1 and "Operational Insights Requiring Further Analysis
 * Section 5.10 "Network Maintenance and Cleanup"
 
 * Section 5.11 "Network API Construction"
+  
+* Section 5.12 "AI-Driven Security Monitoring"
 
 ## Operator Network Assistance
 
@@ -887,7 +893,49 @@ Section 5.4.1 and "Operational Insights Requiring Further Analysis
    burden on network engineers but also significantly enhances the
    agility and responsiveness of the network to changing conditions and
    user demands.
- 
+
+## AI-Driven Security Monitoring
+
+AI is becoming a cornerstone of modern network security, enabling
+proactive, adaptive, and intelligent measures to safeguard network
+operations against a rapidly evolving threats. By leveraging AI, network
+operators can enhance their ability to detect, prevent, and respond to
+threats in real-time while automating complex     security processes.
+This section details the key areas where AI drives security enhancements
+in network operations.
+
+### Threat Detection and Mitigation
+
+AI significantly enhances threat detection and mitigation through ML and
+deep learning. By analyzing vast amounts of network traffic data, AI
+models identify unusual patterns and behaviors indicative of malicious
+activity. This includes detecting anomalies that signal threats like
+zero-day attacks or insider threats, generating real-time alerts, and
+incorporating external threat intelligence to recognize known attack
+signatures. Together, these capabilities enable faster response times and
+improved threat recognition.
+
+### Intrusion Detection and Prevention
+
+AI improves intrusion detection systems (IDS) and intrusion prevention
+systems (IPS) by enhancing accuracy and reducing false positives. It
+achieves this through behavioral analysis, which identifies unauthorized
+access or suspicious activities, and automated responses that isolate
+compromised devices or block malicious IP addresses. Additionally, AI’s
+adaptive learning capabilities ensure continuous updates to address new
+threats in dynamic environments.
+
+### Security Policy Automation
+
+Using AI would simplify the creation and enforcement of security policies
+by automating configurations and adjustments, reducing the potential for
+human error. It dynamically updates firewall rules and access controls
+based on real-time threat intelligence, assigns risk scores to network
+devices and applications to prioritize enforcement, and ensures
+compliance with regulatory standards by monitoring for deviations and
+recommending corrective actions.
+
+   
 # AINetOps Scenarios and Use-cases
 
    This section further expands Section 5 by exploring scenarios and use
