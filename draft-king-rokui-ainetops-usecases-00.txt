@@ -2,11 +2,13 @@
 
 
 
-RTG                                                              D. King
-Internet-Draft                                      Lancaster University
-Intended status: Informational                                  R. Rokui
-Expires: 23 June 2025                                              Ciena
-                                                        20 December 2024
+RTG                                                             R. Rokui
+Internet-Draft                                                     Ciena
+Intended status: Informational                                     C. Li
+Expires: 20 July 2025                                             Huawei
+                                                                 D. King
+                                                    Lancaster University
+                                                         16 January 2025
 
 
           Artificial Intelligence (AI) for Network Operations
@@ -44,19 +46,22 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 June 2025.
+   This Internet-Draft will expire on 20 July 2025.
+
+
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                  [Page 1]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
-
-
-
-King & Rokui              Expires 23 June 2025                  [Page 1]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents (https://trustee.ietf.org/
@@ -76,55 +81,59 @@ Table of Contents
    4.  Definition of AINetOps  . . . . . . . . . . . . . . . . . . .   6
    5.  Operational Benefits Provided by AINetOps . . . . . . . . . .   7
      5.1.  Operator Network Assistance . . . . . . . . . . . . . . .   8
-     5.2.  Reactive Network Assurance  . . . . . . . . . . . . . . .   8
-       5.2.1.  Root Cause Analysis . . . . . . . . . . . . . . . . .   9
-     5.3.  Predictive Analytics  . . . . . . . . . . . . . . . . . .  10
+     5.2.  Reactive Network Assurance  . . . . . . . . . . . . . . .   9
+       5.2.1.  Root Cause Analysis . . . . . . . . . . . . . . . . .  10
+     5.3.  Predictive Analytics  . . . . . . . . . . . . . . . . . .  11
        5.3.1.  Proactive Network Assurance and Monitoring (Health
-               Check)  . . . . . . . . . . . . . . . . . . . . . . .  11
-       5.3.2.  Anomaly Detection . . . . . . . . . . . . . . . . . .  12
-       5.3.3.  Trending and Forecasting  . . . . . . . . . . . . . .  13
+               Check)  . . . . . . . . . . . . . . . . . . . . . . .  12
+       5.3.2.  Anomaly Detection . . . . . . . . . . . . . . . . . .  13
+       5.3.3.  Trending and Forecasting  . . . . . . . . . . . . . .  14
        5.3.4.  Predictive Maintenance  . . . . . . . . . . . . . . .  14
-       5.3.5.  Network Capacity Planning . . . . . . . . . . . . . .  14
+       5.3.5.  Network Capacity Planning . . . . . . . . . . . . . .  15
        5.3.6.  Traffic Optimization  . . . . . . . . . . . . . . . .  15
-     5.4.  Network Operational Insights  . . . . . . . . . . . . . .  15
-       5.4.1.  Operational Insights Requiring No Further Analysis  .  15
-       5.4.2.  Operational Insights Requiring Further Analysis . . .  16
-     5.5.  Network Configuration Management  . . . . . . . . . . . .  17
+     5.4.  Network Operational Insights  . . . . . . . . . . . . . .  16
+       5.4.1.  Operational Insights Requiring No Further Analysis  .  16
+       5.4.2.  Operational Insights Requiring Further Analysis . . .  17
+     5.5.  Network Configuration Management  . . . . . . . . . . . .  18
      5.6.  IP/Optical Multi-layer Planning . . . . . . . . . . . . .  18
-     5.7.  Cross-Layer and Multi-Layer Optimization  . . . . . . . .  18
-     5.8.  Traffic Optimization  . . . . . . . . . . . . . . . . . .  18
-     5.9.  Closed-Loop Automation  . . . . . . . . . . . . . . . . .  19
-     5.10. Network Maintenance and Cleanup . . . . . . . . . . . . .  19
-     5.11. Network API Construction  . . . . . . . . . . . . . . . .  19
-   6.  AINetOps Scenarios and Use-cases  . . . . . . . . . . . . . .  20
-     6.1.  Network Reactive Assurance  . . . . . . . . . . . . . . .  21
-     6.2.  Network Pro-active Assurance  . . . . . . . . . . . . . .  22
-     6.3.  Network Anomaly Detection . . . . . . . . . . . . . . . .  22
-     6.4.  Network Predictive Maintenance  . . . . . . . . . . . . .  23
-     6.5.  Detection of Network Misconfiguration . . . . . . . . . .  23
-     6.6.  Generate Node Configuration . . . . . . . . . . . . . . .  24
-     6.7.  Cognitive Search On Internal Operator Data  . . . . . . .  24
-     6.8.  Network Operator Assistant  . . . . . . . . . . . . . . .  25
-     6.9.  Gen-AI based Network Operational Insights . . . . . . . .  25
+     5.7.  Cross-Layer and Multi-Layer Optimization  . . . . . . . .  19
+     5.8.  Traffic Optimization  . . . . . . . . . . . . . . . . . .  19
+     5.9.  Closed-Loop Automation  . . . . . . . . . . . . . . . . .  20
+     5.10. Network Maintenance and Cleanup . . . . . . . . . . . . .  20
+     5.11. Network API Construction  . . . . . . . . . . . . . . . .  20
+     5.12. AI-Driven Security Monitoring . . . . . . . . . . . . . .  21
+       5.12.1.  Threat Detection and Mitigation  . . . . . . . . . .  21
+       5.12.2.  Intrusion Detection and Prevention . . . . . . . . .  21
+       5.12.3.  Security Policy Automation . . . . . . . . . . . . .  22
+   6.  AINetOps Scenarios and Use-cases  . . . . . . . . . . . . . .  22
 
 
 
-King & Rokui              Expires 23 June 2025                  [Page 2]
+Rokui, et al.             Expires 20 July 2025                  [Page 2]
 
-Internet-Draft             AINetOps Use Cases              December 2024
+Internet-Draft             AINetOps Use Cases               January 2025
 
 
-     6.10. Network Traffic Prediction  . . . . . . . . . . . . . . .  26
-     6.11. Multi-layer Use-case  . . . . . . . . . . . . . . . . . .  26
-     6.12. Multi-layer Network Planning  . . . . . . . . . . . . . .  27
-     6.13. Causality Discovery . . . . . . . . . . . . . . . . . . .  27
-     6.14. Network Clean Up  . . . . . . . . . . . . . . . . . . . .  28
-     6.15. Other Use Cases . . . . . . . . . . . . . . . . . . . . .  28
-   7.  Normative References  . . . . . . . . . . . . . . . . . . . .  29
-   Appendix A.  IANA Considerations  . . . . . . . . . . . . . . . .  29
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  29
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  29
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  30
+     6.1.  Network Reactive Assurance  . . . . . . . . . . . . . . .  23
+     6.2.  Network Pro-active Assurance  . . . . . . . . . . . . . .  23
+     6.3.  Network Anomaly Detection . . . . . . . . . . . . . . . .  24
+     6.4.  Network Predictive Maintenance  . . . . . . . . . . . . .  24
+     6.5.  Detection of Network Misconfiguration . . . . . . . . . .  25
+     6.6.  Generate Node Configuration . . . . . . . . . . . . . . .  25
+     6.7.  Cognitive Search On Internal Operator Data  . . . . . . .  26
+     6.8.  Network Operator Assistant  . . . . . . . . . . . . . . .  26
+     6.9.  Gen-AI based Network Operational Insights . . . . . . . .  27
+     6.10. Network Traffic Prediction  . . . . . . . . . . . . . . .  27
+     6.11. Multi-layer Use-case  . . . . . . . . . . . . . . . . . .  28
+     6.12. Multi-layer Network Planning  . . . . . . . . . . . . . .  28
+     6.13. Causality Discovery . . . . . . . . . . . . . . . . . . .  29
+     6.14. Network Clean Up  . . . . . . . . . . . . . . . . . . . .  29
+     6.15. Other Use Cases . . . . . . . . . . . . . . . . . . . . .  30
+   7.  Normative References  . . . . . . . . . . . . . . . . . . . .  30
+   Appendix A.  IANA Considerations  . . . . . . . . . . . . . . . .  30
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  31
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  31
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  31
 
 1.  Introduction
 
@@ -153,6 +162,14 @@ Internet-Draft             AINetOps Use Cases              December 2024
    assurance (e.g., anomaly detection, predictive maintenance), closed-
    loop optimization, and misconfiguration detection.  Emerging
    capabilities, such as generative AI for operational insights and
+
+
+
+Rokui, et al.             Expires 20 July 2025                  [Page 3]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
+
    virtual operator assistants, further emphasize the need for a robust
    framework to support AI-driven network management.  Additionally, the
    multi-layered nature of these use cases, encompassing IP, optical,
@@ -162,13 +179,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    This document provides a foundation for advancing IETF protocols and
    architectures to enable AINetOps-driven network operations by
    exploring these use cases, the requirements, and their implications.
-
-
-
-King & Rokui              Expires 23 June 2025                  [Page 3]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
 
 1.1.  Background
 
@@ -208,6 +218,14 @@ Internet-Draft             AINetOps Use Cases              December 2024
          the interaction between computers and humans through natural
          language.
 
+
+
+
+Rokui, et al.             Expires 20 July 2025                  [Page 4]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
+
    *  AINetOps:  Artificial Intelligence for Network Operations refers
          to the application of AI, ML, and generative-AI techniques to
          enhance and automate network operations.
@@ -218,13 +236,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    *  Multi-Layer Optimization:  Addressing cross-layer dependencies and
          optimizing resources across different network layers, such as
          IP and optical layers.
-
-
-
-King & Rokui              Expires 23 June 2025                  [Page 4]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
 
 3.  AI, ML, Deep Learning and Gen-AI
 
@@ -252,6 +263,25 @@ Internet-Draft             AINetOps Use Cases              December 2024
    Figure 1 shows the relationship between AI, ML, Deep Learning, and
    Gen-AI.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                  [Page 5]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
+
                        |-------------------------------------|
                        |                  AI                 |
                        |   |-----------------------------|   |
@@ -269,18 +299,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
 
       Figure 1: Figure 1: Relationship between AI, ML, Deep Learning,
                                  and Gen-AI
-
-
-
-
-
-
-
-
-King & Rokui              Expires 23 June 2025                  [Page 5]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
 
 4.  Definition of AINetOps
 
@@ -311,6 +329,15 @@ Internet-Draft             AINetOps Use Cases              December 2024
    maintaining seamless network operations and achieving strategic
    business objectives
 
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                  [Page 6]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
+
    Section 5 expands the Operational benefits shown in Figure 2 and
    provides a detailed explanation of the various operational benefits
    offered by AINetOp.
@@ -330,13 +357,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
         Big Data: Historical or Real-time data
                  (e.g., time series PM, Alarm, Topology, Log,
                   OAM data, product content/documentation etc.)
-
-
-
-King & Rokui              Expires 23 June 2025                  [Page 6]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
 
                 Figure 2: Figure 2: Definition of AINetOp
 
@@ -364,6 +384,16 @@ Internet-Draft             AINetOps Use Cases              December 2024
       Section 5.3.3, "Predictive Maintenance" Section 5.3.4 and "Network
       Capacity Planning" Section 5.3.5
 
+
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                  [Page 7]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
+
    *  Section 5.4 "Network Operational Insight".  This area can be
       grouped into "Operational Insights Requiring No Further Analysis "
       Section 5.4.1 and "Operational Insights Requiring Further Analysis
@@ -383,16 +413,7 @@ Internet-Draft             AINetOps Use Cases              December 2024
 
    *  Section 5.11 "Network API Construction"
 
-
-
-
-
-
-
-King & Rokui              Expires 23 June 2025                  [Page 7]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
+   *  Section 5.12 "AI-Driven Security Monitoring"
 
 5.1.  Operator Network Assistance
 
@@ -420,6 +441,15 @@ Internet-Draft             AINetOps Use Cases              December 2024
    continuously improve over time, becoming more adept at recognizing
    new types of anomalies and adapting to evolving network conditions.
 
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                  [Page 8]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
+
    Furthermore, the contextual understanding capabilities of AI-powered
    operator network assistant significantly enhance operator decision-
    making.  By considering the broader context of network operations,
@@ -442,14 +472,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    Optical, and IPoDWDM networks.  This process involves the
    identification and resolution of network issues as they arise,
    ensuring that any disruptions or degradations are promptly addressed.
-
-
-
-King & Rokui              Expires 23 June 2025                  [Page 8]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    By employing AINetOps techniques, network engineers can quickly
    pinpoint the root cause of problems, whether they originate in the IP
    layer, the optical layer, or across both.  This reactive approach is
@@ -473,6 +495,16 @@ Internet-Draft             AINetOps Use Cases              December 2024
    effectively managing both single-layer and multi-layer
    troubleshooting, network engineers can ensure a more robust and
    resilient network infrastructure.
+
+
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                  [Page 9]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
    The importance of reactive assurance and troubleshooting cannot be
    overstated in today's high-demand network environments.  Rapid
@@ -498,14 +530,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    This comprehensive approach ensures that the root cause of an issue
    is accurately identified, rather than just addressing the symptoms.
    Techniques such as graph-based analysis enable network engineers to
-
-
-
-King & Rokui              Expires 23 June 2025                  [Page 9]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    visualize and trace the sequence of events leading to a problem,
    providing a clear pathway to the source of the issue.
 
@@ -521,6 +545,22 @@ Internet-Draft             AINetOps Use Cases              December 2024
    representations provide a structured and interconnected view of
    network components and their relationships, aiding in the rapid
    identification of fault points and their impact on the network.
+
+
+
+
+
+
+
+
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 10]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
    By accurately diagnosing the root cause of network issues, network
    operators can implement targeted corrective actions that address the
@@ -545,23 +585,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    analytics can potentially forecast network problems before they
    occur, allowing for proactive management and maintenance.
 
-
-
-
-
-
-
-
-
-
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 10]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    The core idea behind predictive analytics is to transform data into
    actionable insights.  For network operations, this means analyzing
    various metrics such as traffic patterns, latency, performance
@@ -580,6 +603,20 @@ Internet-Draft             AINetOps Use Cases              December 2024
    operations, ultimately enhancing the overall performance and user
    experience.  The AINetOps can address the following operator's
    scenarios.
+
+
+
+
+
+
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 11]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
 5.3.1.  Proactive Network Assurance and Monitoring (Health Check)
 
@@ -610,14 +647,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    that could degrade IP data transmission quality.  By correlating data
    from both layers, AINetOps solution can provide insights into how
    changes in the optical layer might affect IP performance and vice
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 11]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    versa.  This enables operators to take preemptive actions, such as
    optimizing signal paths or adjusting routing protocols, to maintain
    optimal network performance.
@@ -637,6 +666,14 @@ Internet-Draft             AINetOps Use Cases              December 2024
    network assurance and monitoring is one of the operational benefits
    provided by AINetOps and are essential for staying ahead of potential
    issues and maintaining a competitive edge.  By leveraging the power
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 12]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
+
    of AINetOp, network operators can transform their approach from
    reactive to proactive, ensuring that their networks are not only
    robust and resilient but also capable of delivering the high-quality
@@ -664,16 +701,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    models provide early warnings, allowing for timely interventions to
    prevent unexpected downtime and maintain optimal performance.
 
-
-
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 12]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    Clustering techniques further enhance anomaly detection by grouping
    similar data points to identify patterns and trends that signal
    imminent failures or suboptimal behavior.  This method allows ML
@@ -687,6 +714,21 @@ Internet-Draft             AINetOps Use Cases              December 2024
    techniques, AINetOps not only improves anomaly detection but also
    empowers network operators with the insights needed to maintain a
    high-performing and reliable network infrastructure.
+
+
+
+
+
+
+
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 13]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
 5.3.3.  Trending and Forecasting
 
@@ -722,14 +764,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    the resilience and efficiency of IP optical networks, ensuring
    superior performance and reliability.
 
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 13]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
 5.3.4.  Predictive Maintenance
 
    Predictive maintenance in the context of single-layer or multi-layer
@@ -744,6 +778,14 @@ Internet-Draft             AINetOps Use Cases              December 2024
    like signal strength, attenuation, and equipment performance helps
    predict when optical amplifiers or transceivers might need
    maintenance.  By accurately forecasting these maintenance needs,
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 14]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
+
    network operators can schedule interventions before failures occur,
    reducing unplanned downtime and extending the lifespan of network
    components.
@@ -777,15 +819,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    threats by analyzing traffic patterns and detecting anomalies that
    may indicate malicious activities.
 
-
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 14]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
 5.3.6.  Traffic Optimization
 
    Referring to Section 5.8 for details of AINetOps "Traffic
@@ -794,6 +827,20 @@ Internet-Draft             AINetOps Use Cases              December 2024
    If "Traffic Optimization" is based on prediction of the traffic
    flows, it can be categorized as one of the areas of "Predictive
    Analytics".
+
+
+
+
+
+
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 15]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
 5.4.  Network Operational Insights
 
@@ -832,16 +879,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    These insights provide immediate, actionable information that can
    help network operators quickly identify and address issues.
 
-
-
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 15]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    These insights are typically derived from real-time monitoring
    systems that continuously track network performance and health
    metrics.  For example, showing the Network Element (NE) with the
@@ -853,6 +890,13 @@ Internet-Draft             AINetOps Use Cases              December 2024
    to quickly pinpoint areas that require attention.  These insights are
    crucial for maintaining network stability and ensuring prompt
    resolution of emerging issues.
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 16]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
    These insights also include detailed information about network
    components and their performance.  For instance, identifying which
@@ -890,14 +934,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    These insights are crucial for long-term network health and
    performance optimization.  Identifying the most common failure points
    in the network or detecting signs of degradation in wireless network
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 16]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    performance requires a combination of historical data analysis and
    predictive modeling.  By simulating different maintenance activities
    based on current network health, operators can prioritize tasks that
@@ -907,6 +943,16 @@ Internet-Draft             AINetOps Use Cases              December 2024
    future outages.  These insights enable operators to take a strategic
    approach to network management, ensuring sustained performance and
    reliability over time.
+
+
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 17]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
 5.5.  Network Configuration Management
 
@@ -940,20 +986,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    efficiency but also supports the dynamic and scalable nature of
    modern network environments.
 
-
-
-
-
-
-
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 17]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
 5.6.  IP/Optical Multi-layer Planning
 
    Multi-layer planning is an approach that integrates the planning of
@@ -963,6 +995,20 @@ Internet-Draft             AINetOps Use Cases              December 2024
    enhance network efficiency, and ensure the network can handle current
    and future demands, resulting in a more resilient and scalable
    infrastructure.
+
+
+
+
+
+
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 18]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
 5.7.  Cross-Layer and Multi-Layer Optimization
 
@@ -1002,14 +1048,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    potential congestion points before they impact service quality.  By
    analyzing historical data and real-time metrics, machine learning
    models can forecast traffic patterns and proactively adjust routing
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 18]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    decisions to ensure optimal performance.  For instance, AINetOps can
    reroute traffic through less congested paths when high utilization is
    detected, balancing the load and enhancing overall network
@@ -1020,6 +1058,14 @@ Internet-Draft             AINetOps Use Cases              December 2024
    respond to sudden changes in demand, such as peak usage times or
    unexpected traffic spikes.  Traditional static configurations may
    struggle with such fluctuations, leading to bottlenecks and degraded
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 19]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
+
    performance.  With AI, the network can dynamically reconfigure itself
    in real-time, redistributing traffic loads and reallocating bandwidth
    as needed.  This adaptability reduces the need for manual
@@ -1058,14 +1104,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
    multi-layer) with Operational Support Systems (OSS) or other network
    controllers.  A key advantage of this operational benefit is that
    operators do not need to possess in-depth knowledge of the APIs.
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 19]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    Typically, network operators spend considerable time creating and
    verifying APIs to integrate IP or Optical network elements with the
    broader management layer, including OSS/BSS.  By developing robust
@@ -1076,6 +1114,14 @@ Internet-Draft             AINetOps Use Cases              December 2024
    The APIs developed for network controllers serve as a bridge,
    enabling the OSS to interact with the underlying network
    infrastructure in a more dynamic and automated manner.  This
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 20]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
+
    integration allows for real-time data exchange, automated
    provisioning, and efficient fault management, which are essential for
    maintaining optimal network performance.  Moreover, these APIs
@@ -1095,6 +1141,56 @@ Internet-Draft             AINetOps Use Cases              December 2024
    agility and responsiveness of the network to changing conditions and
    user demands.
 
+5.12.  AI-Driven Security Monitoring
+
+   AI is becoming a cornerstone of modern network security, enabling
+   proactive, adaptive, and intelligent measures to safeguard network
+   operations against a rapidly evolving threats.  By leveraging AI,
+   network operators can enhance their ability to detect, prevent, and
+   respond to threats in real-time while automating complex security
+   processes.  This section details the key areas where AI drives
+   security enhancements in network operations.
+
+5.12.1.  Threat Detection and Mitigation
+
+   AI significantly enhances threat detection and mitigation through ML
+   and deep learning.  By analyzing vast amounts of network traffic
+   data, AI models identify unusual patterns and behaviors indicative of
+   malicious activity.  This includes detecting anomalies that signal
+   threats like zero-day attacks or insider threats, generating real-
+   time alerts, and incorporating external threat intelligence to
+   recognize known attack signatures.  Together, these capabilities
+   enable faster response times and improved threat recognition.
+
+5.12.2.  Intrusion Detection and Prevention
+
+   AI improves intrusion detection systems (IDS) and intrusion
+   prevention systems (IPS) by enhancing accuracy and reducing false
+   positives.  It achieves this through behavioral analysis, which
+   identifies unauthorized access or suspicious activities, and
+   automated responses that isolate compromised devices or block
+   malicious IP addresses.  Additionally, AI’s adaptive learning
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 21]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
+
+   capabilities ensure continuous updates to address new threats in
+   dynamic environments.
+
+5.12.3.  Security Policy Automation
+
+   Using AI would simplify the creation and enforcement of security
+   policies by automating configurations and adjustments, reducing the
+   potential for human error.  It dynamically updates firewall rules and
+   access controls based on real-time threat intelligence, assigns risk
+   scores to network devices and applications to prioritize enforcement,
+   and ensures compliance with regulatory standards by monitoring for
+   deviations and recommending corrective actions.
+
 6.  AINetOps Scenarios and Use-cases
 
    This section further expands Section 5 by exploring scenarios and use
@@ -1113,15 +1209,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
       use case, including control-plane and data-plane interactions, as
       well as integration points for AI-driven systems
 
-
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 20]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    *  Interfaces and APIs: The key interfaces between AI systems and
       network elements, including management APIs (e.g., NETCONF,
       RESTCONF, gNMI) and telemetry interfaces
@@ -1139,6 +1226,13 @@ Internet-Draft             AINetOps Use Cases              December 2024
 
    *  Alignment with IETF Standards: Analysis of how existing IETF
       standards can be leveraged or extended to support the use case.
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 22]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
 6.1.  Network Reactive Assurance
 
@@ -1171,13 +1265,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
 
    *  Protocols
 
-
-
-King & Rokui              Expires 23 June 2025                 [Page 21]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    To be added.
 
    *  Data Models
@@ -1195,6 +1282,13 @@ Internet-Draft             AINetOps Use Cases              December 2024
    To be added.
 
    *  Interfaces and APIs
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 23]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
    To be added.
 
@@ -1226,14 +1320,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
 
    *  Data Models
 
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 22]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    To be added.
 
    *  Alignment with IETF
@@ -1251,6 +1337,14 @@ Internet-Draft             AINetOps Use Cases              December 2024
    To be added.
 
    *  Protocols
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 24]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
    To be added.
 
@@ -1282,14 +1376,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
 
    *  Alignment with IETF
 
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 23]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    To be added.
 
 6.6.  Generate Node Configuration
@@ -1308,6 +1394,13 @@ Internet-Draft             AINetOps Use Cases              December 2024
    *  Protocols
 
    To be added.
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 25]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
    *  Data Models
 
@@ -1338,14 +1431,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
 
    To be added.
 
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 24]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    *  Alignment with IETF
 
    To be added.
@@ -1365,6 +1450,13 @@ Internet-Draft             AINetOps Use Cases              December 2024
    *  Protocols
 
    To be added.
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 26]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
    *  Data Models
 
@@ -1394,14 +1486,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
 
    *  Alignment with IETF
 
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 25]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    To be added.
 
 6.10.  Network Traffic Prediction
@@ -1421,6 +1505,14 @@ Internet-Draft             AINetOps Use Cases              December 2024
    To be added.
 
    *  Data Models
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 27]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
    To be added.
 
@@ -1450,14 +1542,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
 
    *  Alignment with IETF
 
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 26]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    To be added.
 
 6.12.  Multi-layer Network Planning
@@ -1477,6 +1561,14 @@ Internet-Draft             AINetOps Use Cases              December 2024
    To be added.
 
    *  Data Models
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 28]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
    To be added.
 
@@ -1506,14 +1598,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
 
    *  Alignment with IETF
 
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 27]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    To be added.
 
 6.14.  Network Clean Up
@@ -1533,6 +1617,14 @@ Internet-Draft             AINetOps Use Cases              December 2024
    To be added.
 
    *  Data Models
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 29]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
    To be added.
 
@@ -1562,14 +1654,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
 
    *  Alignment with IETF
 
-
-
-
-King & Rokui              Expires 23 June 2025                 [Page 28]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    To be added.
 
 7.  Normative References
@@ -1586,6 +1670,17 @@ Internet-Draft             AINetOps Use Cases              December 2024
 Appendix A.  IANA Considerations
 
    This document has no IANA actions.
+
+
+
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 30]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
 
 Acknowledgments
 
@@ -1619,13 +1714,6 @@ Contributors
    Email: vincenzo.riccobene@huawei-partners.com
 
 
-
-
-King & Rokui              Expires 23 June 2025                 [Page 29]
-
-Internet-Draft             AINetOps Use Cases              December 2024
-
-
    Nathalie Romo-moreno
    Telekom
    Email: nathalie.romo-moreno@telekom.de
@@ -1638,11 +1726,6 @@ Internet-Draft             AINetOps Use Cases              December 2024
 
 Authors' Addresses
 
-   Daniel King
-   Lancaster University
-   Email: d.king@lancaster.ac.uk
-
-
    Reza Rokui
    Ciena
    Email: rrokui@ciena.com
@@ -1650,6 +1733,19 @@ Authors' Addresses
 
 
 
+Rokui, et al.             Expires 20 July 2025                 [Page 31]
+
+Internet-Draft             AINetOps Use Cases               January 2025
+
+
+   Cheng Li
+   Huawei
+   Email: c.l@huawei.com
+
+
+   Daniel King
+   Lancaster University
+   Email: d.king@lancaster.ac.uk
 
 
 
@@ -1677,4 +1773,20 @@ Authors' Addresses
 
 
 
-King & Rokui              Expires 23 June 2025                 [Page 30]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Rokui, et al.             Expires 20 July 2025                 [Page 32]
