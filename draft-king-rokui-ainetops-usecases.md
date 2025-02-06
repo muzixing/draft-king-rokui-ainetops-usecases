@@ -1380,7 +1380,7 @@ These enabling technologies are discussed in the following sub-sections.
 
 * Architecture
 
-To be added.
+The Abstraction and Control of Traffic Engineered Networks (ACTN) ACTN [RFC8453] architecture provides a framework for virtualized network resource control and abstraction, enabling efficient multi-layer coordination between packet and optical networks. It defines key functional components like the Multi-Domain Coordinator (MDSC), which facilitates policy-based control and end-to-end service planning and provisioning. 
 
 * Interfaces and APIs
 
