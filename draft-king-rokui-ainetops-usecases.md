@@ -1380,14 +1380,14 @@ These enabling technologies are discussed in the following sub-sections.
 
 * Architecture
 
-The Abstraction and Control of Traffic Engineered Networks (ACTN) ACTN [RFC8453] architecture provides a framework for virtualized network resource control and abstraction, enabling efficient multi-layer coordination between packet and optical networks. It defines key functional components like the Multi-Domain Coordinator (MDSC), which facilitates policy-based control and end-to-end service planning and provisioning. 
+The Abstraction and Control of Traffic Engineered Networks (ACTN) ACTN {{!RFC8453}} architecture provides a framework for virtualized network resource control and abstraction, enabling efficient multi-layer coordination between packet and optical networks. It defines key functional components like the Multi-Domain Coordinator (MDSC), which facilitates policy-based control and end-to-end service planning and provisioning. 
 
 * Interfaces and APIs
 
 The Path Computation Element (PCE) is a fundamental component of a Software Defined Networking (SDN) system, responsible for computing optimal traffic paths and dynamically adjusting them based on network conditions or demand. Originally designed for deriving paths for MPLS, and GMPLS, Label Switched Paths (LSPs), PCE delivers these computed routes to the LSP’s head end via the Path Computation Element Communication Protocol
 (PCEP).
 
-The PCE architecture [RFC4655] enables efficient path computation for traffic-engineered networks by offloading complex calculations to a dedicated entity. Stateful PCE [RFC8051 and RFC8231] extends the PCE framework by maintaining real-time network state awareness, allowing dynamic path optimisation across layers. The Hierarchical PCE (H-PCE) [RFC6805] architecture supports multi-layer and multi-domain path computation by allowing collaboration between multiple PCEs.
+The PCE architecture {{!RFC4655}} enables efficient path computation for traffic-engineered networks by offloading complex calculations to a dedicated entity. Stateful PCE {{!RFC8051}} and {{!RFC8231}} extends the PCE framework by maintaining real-time network state awareness, allowing dynamic path optimisation across layers. The Hierarchical PCE (H-PCE) {{!RFC6805}} architecture supports multi-layer and multi-domain path computation by allowing collaboration between multiple PCEs.
 
 * Protocols
 
@@ -1397,7 +1397,7 @@ To be added.
 
 The YANG data modeling language is a cornerstone for MLN planning. It provides a structured way to represent network elements, configurations, and operational states, enabling programmatic control and integration across multiple network layers. Severeal IETF YANG models provide network topology, traffic engineering, optical transport, and service abstraction.
 
-A core YANG model for MLN planning is the Network Topology Model [RFC8345], which provides a generic framework for representing network nodes, links, and supporting attributes. This model would faciliate an AI-enabled planning system to define multi-layer relationships, such as the mapping between optical, ethernet, and IP layers, enabling a holistic approach to MLN planning.
+A core YANG model for MLN planning is the Network Topology Model {{!RFC8345}}, which provides a generic framework for representing network nodes, links, and supporting attributes. This model would faciliate an AI-enabled planning system to define multi-layer relationships, such as the mapping between optical, ethernet, and IP layers, enabling a holistic approach to MLN planning.
 
 * Alignment with IETF
 
