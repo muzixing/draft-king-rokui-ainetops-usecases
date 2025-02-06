@@ -1362,7 +1362,21 @@ To be added.
 
 ## Multi-layer Network Planning
 
-   IP/Optical Planning, multi-layer optimization
+Several innovations have been developed at the IETF for multi-layer network (MLN) planning. This activity is involves coordinating and optimising multiple network layers, such as IP, optical, and transport layers, to improve efficiency, resilience, and scalability. The Internet Engineering Task Force (IETF) has developed several technologies and standards to facilitate multi-layer network planning, including protocols for path computation, topology exchange, and resource optimisation.
+
+The components and interfaces for MLN planning include:
+
+o Path Computation Element (PCE)
+
+o Generalized Multi-Protocol Label Switching (GMPLS)
+
+o Traffic Engineering Database (TED) and Topology Exchange
+
+o Abstraction and Control of Traffic Engineered Networks (ACTN)
+
+o YANG Models for Network Topologies and Node Inventory
+
+These enabling technologies are discussed in the following sub-sections. 
 
 * Architecture
 
