@@ -1520,7 +1520,7 @@ An example with an arbitrary number of agents (N) connecting to different compon
             v                      |    |      |         |     
       |---------------|            v    V      |         V
       |   P-PNC(s),   |      |--------------|  |      |------------|
-  (A) |   O-PNC(s),   |      | Observability|  |  ... | Assurance  |
+      |   O-PNC(s),   |      | Observability|  |  ... | Assurance  |
       |   MDSC        |      |              |  |      |            |
       |---------------|      |--------------|  |      |------------|
               ^                                |
@@ -1532,14 +1532,14 @@ An example with an arbitrary number of agents (N) connecting to different compon
     +----------------------------------------------------------+
 
   Legend:
-  (A) Inter Agent comunication for comunication and coordination
+  (A) Inter Agent comunication for coordination
 
 ~~~~
 {: #figure-multi-agent title="Multi-agent architecture"}
 
 Alternatively, a hierarchical solution can be foreseen, with an agent (H-Agent) specifically
 designed for coordinating agents, or an agent designated to play the role of H-Agent in addition
-to its duties, as shown in {{figure-h-agent}}
+to its duties, as shown in {{figure-h-agent}}:
 
 ~~~~         
                         |------------|
@@ -1557,7 +1557,7 @@ to its duties, as shown in {{figure-h-agent}}
             v                      |    |      |         |     
       |---------------|            v    V      |         V
       |   P-PNC(s),   |      |--------------|  |      |------------|
-  (A) |   O-PNC(s),   |      | Observability|  |  ... | Assurance  |
+      |   O-PNC(s),   |      | Observability|  |  ... | Assurance  |
       |   MDSC        |      |              |  |      |            |
       |---------------|      |--------------|  |      |------------|
               ^                                |
@@ -1569,7 +1569,7 @@ to its duties, as shown in {{figure-h-agent}}
     +----------------------------------------------------------+
 
   Legend:
-  (A) Inter Agent comunication for comunication and coordination
+  (A) H-Agent to Agent comunication 
 
 ~~~~
 {: #figure-h-agent title="Multi-agent hierarchical architecture"}
