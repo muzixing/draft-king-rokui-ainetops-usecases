@@ -309,6 +309,8 @@ Section 5.4.1 and "Operational Insights Requiring Further Analysis
   
 * Section 5.12 "AI-Driven Security Monitoring"
 
+* Section 5.13 "Agents Interworking"
+
 ## Operator Network Assistance
 
    Powered by Gen-AI, the operator network assistant functions as a
