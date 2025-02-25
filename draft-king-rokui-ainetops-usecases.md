@@ -65,6 +65,7 @@ contributor:
 normative:
 
 informative:
+---
 
 --- abstract
 
@@ -1610,6 +1611,276 @@ To be added.
 
 To be added.
 
+## Network traffic management
+
+Flow placement, traffic engineering/steering along with network
+resource defragmentation are among important aspects of network
+operations that can benefit from artificial intelligence.
+
+Network routing protocols automate flow placement for best-effort
+traffic.  Traffic engineering and steering are commonly based on
+statistical analysis and historical trends of network traffic.  They
+are mostly implemented via configurations and tunnel setups, often
+employing scripts for automation purposes.
+
+While there are some proactive approach to network resource
+defragmentation, reactive methods are still quite common.  There are
+short-term approaches and longer-term views on employing AI to
+address traffic management. 
+
+### Short term approaches
+   
+In the short-term, AI models train on operator’s network traffic
+patterns and employ a set of APIs to connect to network configuration
+equipment in order to add, remove, and modify configurations and perform
+different traffic management related tasks. Model training can be either 
+off-line or on-line.
+
+Initially, AI models perform their inference tasks exclusively based
+on their training on historical network traffic patterns, and topology changes
+in a centralized manner.  In more advanced approaches, the models not only
+train on network traffic patterns, and network topology changes, but also 
+learn how to interpret and digest external events. This added capability allows
+the AI models to be more effective in performing their traffic management tasks.
+
+Generally speaking, IETF/IRTF can work on describing and providing synthetic networks
+along with synthetic traffic that can be used to train AI models. Furthermore, IETF/IRTF
+can also define and provide expected reasonable traffic flows. 
+
+
+#### Offline training
+
+During off-line training, external events, network monitoring information 
+(available via protocols such as SNMP), historical data from traffic engineering 
+databases, network topology changes, and other traffic-related data from the 
+operator's network are collected over time. This data is then used later 
+during the training and model performance evaluation process.
+
+There is potential to define a set of APIs to collect information or enable
+a query mechanism to pull the required training data, particularly for external events.
+
+Selecting the important features from the entire dataset is another crucial
+aspect of training.
+
+IETF/IRTF can certainly play a role in both of the above-mentioned cases.
+
+~~~~
++---------+     (A) + (B)                 
+| Outside |xxxxxxxx External xxxxxxxxx
+|  world  |          events          x
++---------+                          x
+                                     x
+                                     V
++-----------+              +--------------------+
+|  Network  |------------->|     Dataset        |
++-----------+              |    repository      |
+                           +--------------------+
+                           | Network monitoring |
+                           |       info.        |
+                           |   (e.g via SNMP)   |
+                           |         +          |
+                           |   Topology changes |
+                           |         +          |
+                           |   Historical data  |
+                           |   from TE-DB, etc. |
+                           +--------------------+
+                                     x
+                                     x (B)
+                                     x
+                                     V
+                               +------------+   
+                               |  AI model  |
+                               |   under    |
+                               |  training  |
+                               +------------+
+                             
+
+  Legend:
+  xxx Potential IETF defined and standardized interface.
+  (A) Extracting and storing outside world events data.
+  (B) Important features for training the model for traffic mgmt.
+
+~~~~ 
+{: #figure-off-line title="AI assisted traffic management: Offline training"} 
+
+
+#### Online training
+
+On-line training takes a more real-time approach. Here model training is based
+on processing data incrementally as it becomes available. This method is particularly
+suitable for scenarios such as network traffic management which require real-time
+learning and adaptation to changes. 
+
+A traffic management AI model under online training uses the same input sources as it
+does in offline training. However, unlike offline training, the data here is not stored
+in a repository but streamed into the training process. As such, the ground truth for model performance evaluation in online training is derived from observation of
+actual real time world events and network behavior, rather than stored data.
+The training process therefore requires a mechanism to extract important features from the stream of incoming real-time network data and outside world events. These extracted
+features are then fed to the training process for adjusting model's parameters in a dynamic manner.
+
+IETF/IRTF can work to standardize the mechanisms to identify important feature and implement the above mentioned required real-time data delivery and feature extraction.
+
+~~~~
++---------+     (A) + (B)              
+| Outside |xxxxxxxxxxxx External xxxxxxxxxxxxxxxx
+|  world  |              events                 x
++---------+                                     x
+                                                x
+                                                V
+                                          +------------+   
++-----------+          (A) + (B)          |  AI model  |
+|  Network  |xxxxxxxxxxxxxxxxxxxxxxxxxxxx>|   under    |
++-----------+                             |  training  |
+                                          +------------+
+                real-time stream of                                          
+                Network monitoring    
+                       info.          
+                  (e.g via SNMP)     
+                         +            
+                  Topology changes    
+                         +            
+                  Historical data    
+                  from TE-DB, etc.   
+                                      
+
+  Legend:
+  xxx Potential IETF defined and standardized interface.
+  (A) Extracting and storing outside world events data.
+  (B) Important features for training the model for traffic mgmt.
+
+~~~~ 
+{: #figure-online-line title="AI assisted traffic management: On-line training"} 
+
+### Inference
+Inference phase for traffic management requires an interface to translate AI model's
+output to a set of network operation tasks and configuration commands. With this
+information readily available, existing protocols such as NETCONF can be employed to
+manage the network.
+
+~~~~
+
++---------+     (A) + (B)              
+| Outside |xxxxxxxxxxxx External xxxxxxxxxxxxxxxx
+|  world  |              events                 x
++---------+                                     x
+                                                x
+                                                V
+                                          +------------+   
++-----------+          (A) + (B)          |  AI model  |
+|  Network  |xxxxxxxxxxxxxxxxxxxxxxxxxxxx>|     in     |
++-----------+                             |  operation |
+      ^                                   +------------+
+      |         real-time stream of             x                             
+      |         Network monitoring              x
+      |                info.                    x (C)
+      |            (e.g via SNMP)               x
+      |                  +                      V
+      |           Topology changes        +------------+
+      |                  +                | AI output  |
+      |               Data from           | to network |
+      |              TE-DB, etc.          | config     |
+      |                                   | translator |
+      |                                   +------------+
+      |                                         |
+      |                                         |
+      +----------- Configuration commands ------+
+
+
+  Legend:
+  xxx Potential IETF defined and standardized interface.
+  (A) Extracting and storing outside world events data.
+  (B) Important features for training the model for traffic mgmt.
+  (C) Standardized output of the AI model delivered for translation
+
+~~~~ 
+{: #figure-Inference title="AI assisted traffic management: Inference"}
+
+
+### Longer term view
+
+Over time, the full integration of AI models and network elements will transform networks from their current state into agent-based or Agentic networks. In a distributed version of Agentic networks, each node is accompanied by an AI agents. Once trained, these agents work together to address flow placement, traffic steering/engineering, and other network related tasks such as traffic management, network resource defragmentation, and even routing.
+
+While being different from networks managed by a set of interworking multi agents , the Agentic networks face some of the same challenges outlined in the multi agent interworking
+section of the document. However, in Agentic networks, distributed training of the agents and proper knowledge sharing between them can enhance their collective training performance and can potentially alleviate some of these difficulties. 
+
+In these networks, AI agents trained on local traffic patterns and external events will exchange knowledge and network state information through a set of protocols in a distributed manner in order to address network related tasks. Agentic networks will potentially offer highly automated, streamlined, and tunnel-less traffic management that is currently available only for best-effort traffic.
+
+
+In addition to the potential standardization opportunities outlined in the previous section, IETF/IRTF can alo play a role in defining and standardizing the followings: 
+
+- Training
+
+   - Mechanisms for distributed training and knowledge sharing
+   - Mechanisms for feeding traffic and overall network state information to agents for training purposes.
+   - Mechanisms for feeding external events information to agents during training. 
+
+- Inference
+
+   - Mechanisms for distributing agents' decisions and inference results.
+   - Mechanisms for feeding traffic and overall network state information to agents during inference phase.
+   - Mechanisms for feeding external events information to agents during inference phase. 
+
+
+- There is also potentially a need to define mechanisms to identify flow requirements to the agents during network operations.
+
+The following figure depicts an example of an Agentic network.
+
+~~~~
+
++---------+                  (C) + (D)                +---------+
+| Outside |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx| Network |
+| world   |   x                   x             x     |         |
++---------+   x                   x             x     +---------+
+              x                   x             x
+              x                   x             xxxxxxxxxx
+              x                   x                      x
+              V                   V                      V
+        +------------+      +------------+          +------------+
+    xxx>|  AI Agent  |  xxx>|  AI Agent  |      xxx>|  AI Agent  |
+    x   |------------|  x   +------------+ ...  x   +------------+
+    x   |            |  x   |            |      x   |            |
+    x   |   Node-1   |  x   |   Node-2   |      x   |   Node-n   | 
+    x   +------------+  x   +------------+      x   +------------+
+    x                   x                       x
+    x                   x                       x
+    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                       (A) + (B)
+
+ Legend: 
+  xxx Potential IETF defined and standardized interfaces
+  (A) APIs/Interfaces/Protocols for distributing training
+      and knowledge sharing.
+  (B) APIs/Interfaces/Protocols for distributing agents'
+      decisions and inference results.  
+  (C) APIs/Interfaces/Protocols for feeding regionally
+      observed traffic and network state info. to agents
+      for training and inference.
+  (D) APIs/Interfaces/Protocols for feeding regionally
+      observed external events info. to agents for
+      training and inference.
+
+~~~~
+{: #figure-Agentic-networks title="Distributed agentic networks"}
+
+* Architecture
+
+To be added.
+
+* Interfaces and APIs
+
+To be added.
+
+* Protocols
+
+To be added.
+
+* Data Models
+
+To be added.
+
+* Alignment with IETF
+
+To be added.
 
 ## Other Use Cases
 
