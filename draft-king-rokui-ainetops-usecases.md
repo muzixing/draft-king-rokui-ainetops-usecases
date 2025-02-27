@@ -1265,13 +1265,37 @@ To be added.
 
 ## Cognitive Search On Internal Operator Data
 
-The operation of IP and optical networks comprises a wide range of management, monitoring and optimization tasks, including equipment configuration (switches, routers, OTNs, etc.), implementation of network policies, fault detection, troubleshooting, and capacity planning. The execution of such tasks usually requires access, comprehension and analysis of specific documentation containing information about network topologies, hardware inventory, vendor specifications, and pre-defined procedures. Given the capacity of LLMs to understand natural language, including technical Jargon, and their ability to process large amounts of information in short times, they can be used to build useful tools that support the network operational work, by executing comprehensive cognitive searches through the different documentation available to the operational teams, providing fast and concrete answers to technical enquiries, and making the access to such information a more efficient and interactive process.
+The operation of IP and optical networks comprises a wide range of management,
+monitoring and optimization tasks, including equipment configuration (switches,
+routers, OTNs, etc.), implementation of network policies, fault detection,
+troubleshooting, and capacity planning. The execution of such tasks usually requires access, 
+comprehension and analysis of specific documentation containing information about network 
+topologies, hardware inventory, vendor specifications, and pre-defined procedures. 
+Given the capacity of LLMs to understand natural language, including technical 
+jargon, and their ability to process large amounts of information in short times, 
+they can be used to build useful tools that support the network operational work, 
+by executing comprehensive cognitive searches through the different documentation 
+available to the operational teams, providing fast and concrete answers to technical 
+enquiries, and making the access to such information a more efficient and interactive 
+process.
 
-To provision an LLM with such knowledge requires either a fine-tuning training job, that retrains an existing LLM, or the implementation of a RAG based architecture, where the information coming from the documentation is stored in a knowledge base and provided as context to the LLM. For this scenario, the RAG based approach has some specific advantages like lower computational cost, faster deployment, no need of retraining when the documentation is updated, and easier scalability. Therefore, it is often the default approach for this type of solutions.
-Next section provides an architectural overview of how a RAG based system can be implemented to provide cognitive search for network operations.
+To provision an LLM with such knowledge requires either a fine-tuning training job, 
+that retrains an existing LLM, or the implementation of a RAG based architecture, 
+where the information coming from the documentation is stored in a knowledge base 
+and provided as context to the LLM. For this scenario, the RAG based approach has 
+some specific advantages like lower computational cost, faster deployment, no need 
+of retraining when the documentation is updated, and easier scalability. 
+Therefore, it is often the default approach for this type of solutions. Next section provides 
+an architectural overview of how a RAG based system can be implemented to provide cognitive 
+search for network operations.
 
 
 * Architecture
+
+In a RAG based architecture, a knowledge base is created by using an embedding model capable of splitting and transforming the content of different documents into numerical representations (vectors), and storing them in a data base, also known as Vector Data Base. The general process executed by the system every time a query is made by a user can be summarized in the following steps:
+1. Retrieval: The query made by the user is transformed by the embedding model and used to search and retrieve relevant information from the Vector Data Base.
+2. Augmentation: The information retrieved from the Vector Data Base is used to augment the query made by the user, adding context that might be unknown to the LLM.
+3. Generation: The augmented query is sent to the LLM, which then generates and answer in natural language that is finally delivered to the user.
 
 ~~~~  
   
@@ -1306,6 +1330,11 @@ Next section provides an architectural overview of how a RAG based system can be
  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ~~~~  
+
+As previously mentioned, the documents fed into the Vector Data Base for this specific use case, 
+correspond to any kind of Network Operation Documentation, which makes this kind of systems a 
+powerful tool that provides quick and efficient access to complex information, that can span different 
+areas like Network infrastructure, Standard Operating Procedures, Security documentation, Incident and change reports, etc.
 
 * Interfaces and APIs
 
