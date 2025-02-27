@@ -65,6 +65,7 @@ contributor:
 normative:
 
 informative:
+---
 
 --- abstract
 
@@ -308,6 +309,8 @@ Section 5.4.1 and "Operational Insights Requiring Further Analysis
 * Section 5.11 "Network API Construction"
   
 * Section 5.12 "AI-Driven Security Monitoring"
+
+* Section 5.13 "Multi Agent Interworking"
 
 ## Operator Network Assistance
 
@@ -935,6 +938,25 @@ devices and applications to prioritize enforcement, and ensures
 compliance with regulatory standards by monitoring for deviations and
 recommending corrective actions.
 
+## Multi Agent Interworking
+
+As seen in the use cases above, the usage of agents introduces various challenges,
+spanning from the definition of APIs that can be used by the various agent to the
+interworking with already existing components of the Network Managent and Control stack.
+New challenges arise when we move from a single agent to a multi-agent architecture.
+When multiple agents are deployed we need to consider how they discover each other, 
+how they interwork with the discovered agents and how they are kept in synch. 
+
+The discovery aspect could be relatively simple in the short term, when few agents will
+be deployed in the network and it could be possible to manually configure each agent
+with the identifiers and capabilities of the other agents to interact with. With the evolution 
+of AI based architectures with more and more agents being part of the architecture, 
+mechanisms to advertise their presence and more important their capabilties will be required.
+
+The second aspect to consider is the interworking between them. As of today the way we 
+interact with agents is mostly based on LLM, but would that be the best way for
+interacting between them as well? Probably a more machine oriented type of language,
+encoding and protocols would have better perfomances.
    
 # AINetOps Scenarios and Use-cases
 
@@ -1397,15 +1419,32 @@ To be added.
 
 ## Multi-layer Network Planning
 
-   IP/Optical Planning, multi-layer optimization
+Several innovations have been developed at the IETF for multi-layer network (MLN) planning. This activity is involves coordinating and optimising multiple network layers, such as IP, optical, and transport layers, to improve efficiency, resilience, and scalability. The Internet Engineering Task Force (IETF) has developed several technologies and standards to facilitate multi-layer network planning, including protocols for path computation, topology exchange, and resource optimisation.
+
+The components and interfaces for MLN planning include:
+
+o Path Computation Element (PCE)
+
+o Generalized Multi-Protocol Label Switching (GMPLS)
+
+o Traffic Engineering Database (TED) and Topology Exchange
+
+o Abstraction and Control of Traffic Engineered Networks (ACTN)
+
+o YANG Models for Network Topologies and Node Inventory
+
+These enabling technologies are discussed in the following sub-sections. 
 
 * Architecture
 
-To be added.
+The Abstraction and Control of Traffic Engineered Networks (ACTN) ACTN {{!RFC8453}} architecture provides a framework for virtualized network resource control and abstraction, enabling efficient multi-layer coordination between packet and optical networks. It defines key functional components like the Multi-Domain Coordinator (MDSC), which facilitates policy-based control and end-to-end service planning and provisioning. 
 
 * Interfaces and APIs
 
-To be added.
+The Path Computation Element (PCE) is a fundamental component of a Software Defined Networking (SDN) system, responsible for computing optimal traffic paths and dynamically adjusting them based on network conditions or demand. Originally designed for deriving paths for MPLS, and GMPLS, Label Switched Paths (LSPs), PCE delivers these computed routes to the LSP’s head end via the Path Computation Element Communication Protocol
+(PCEP).
+
+The PCE architecture {{!RFC4655}} enables efficient path computation for traffic-engineered networks by offloading complex calculations to a dedicated entity. Stateful PCE {{!RFC8051}} and {{!RFC8231}} extends the PCE framework by maintaining real-time network state awareness, allowing dynamic path optimisation across layers. The Hierarchical PCE (H-PCE) {{!RFC6805}} architecture supports multi-layer and multi-domain path computation by allowing collaboration between multiple PCEs.
 
 * Protocols
 
@@ -1413,7 +1452,9 @@ To be added.
 
 * Data Models
 
-To be added.
+The YANG data modeling language is a cornerstone for MLN planning. It provides a structured way to represent network elements, configurations, and operational states, enabling programmatic control and integration across multiple network layers. Severeal IETF YANG models provide network topology, traffic engineering, optical transport, and service abstraction.
+
+A core YANG model for MLN planning is the Network Topology Model {{!RFC8345}}, which provides a generic framework for representing network nodes, links, and supporting attributes. This model would faciliate an AI-enabled planning system to define multi-layer relationships, such as the mapping between optical, ethernet, and IP layers, enabling a holistic approach to MLN planning.
 
 * Alignment with IETF
 
@@ -1446,6 +1487,415 @@ To be added.
 ## Network Clean Up
 
    Clean-up procedure in the network
+
+* Architecture
+
+To be added.
+
+* Interfaces and APIs
+
+To be added.
+
+* Protocols
+
+To be added.
+
+* Data Models
+
+To be added.
+
+* Alignment with IETF
+
+To be added.
+
+## Multi agent interworking
+
+As briefly introduced in chapter 5, effectively deploying multiple AI agents for network management introduces
+significant interworking challenges that must be addressed for successful and reliable operation.
+These challenges span several key areas:
+
+* Communication and Coordination:  Multiple agents operating in a shared network environment
+  need to communicate effectively to coordinate their actions.  This includes sharing information
+  about network state, learned models, and planned interventions.  A lack of standardized
+  protocols and data models can lead to the need to deploy expensive and time consuming adaptation
+  layers.  It is also extremly important to determine the appropriate communication frequency
+  and granularity to avoid overloading the communication network between them while keeping
+  a sufficient level of details to avoid suboptimal or even harmful decisions due to incomplete information.
+  
+* Conflict Resolution and Decision Fusion:  When multiple agents are responsible for overlapping
+  or interdependent network functions, conflicts in their decisions are inevitable.  For example,
+  one agent might decide to reroute traffic to alleviate congestion, while another agent
+  simultaneously decides to scale down resources in the same area.  Effective conflict resolution
+  mechanisms are needed to prioritize actions, negotiate solutions, and ensure that the overall
+  impact on the network is positive.  This requires defining clear roles and responsibilities
+  for each agent, establishing decision fusion strategies, and potentially incorporating a central
+  arbitration mechanism, like for example in the case of coordination of multiple PCEs. Furthermore,
+  handling conflicting information from different agents, potentially due to noisy or incomplete data,
+  requires robust data validation and aggregation techniques.
+
+* Consistency and Stability:  The dynamic nature of networks requires agents to continuously learn and
+  adapt.  However, independent learning by multiple agents can lead to inconsistencies in their
+  learned models and behaviors, potentially causing instability in the network.  For example,
+  different agents might learn different optimal routing strategies, leading to oscillations
+  and unpredictable network performance.  Mechanisms for sharing learned knowledge, synchronizing models,
+  and ensuring convergence towards a stable and consistent global state are essential.
+  This could involve techniques like federated learning or distributed consensus protocols.
+
+* Trust and Security:  In a multi-agent environment, trust and security become critical concerns.
+  Agents might be vulnerable to malicious attacks or faulty behavior, which can compromise the entire network.
+  Robust authentication and authorization mechanisms are needed to ensure that only legitimate agents
+  can access and control network resources. Establishing trust between agents, potentially through
+  reputation systems or blockchain technologies, can also enhance the overall security and resilience of the network.
+
+* Scalability and Management:  As the number of agents and the complexity of the network increase,
+  managing the interactions between agents becomes increasingly challenging.  Scalable architectures
+  and management frameworks are needed to handle the growing communication overhead, coordination complexity,
+  and resource requirements. One possible option to overcome this problem could be leveraging on a
+  hierarchical agent structure. As previously introduced, in order to allow for scalability, it is also
+  important to foresee advertisement protocols/extensions to let the agents learn about their counterparts
+  and their capabilities. 
+
+Addressing these interworking challenges is essential for realizing the full potential of AI agents in network management.
+Developing standardized protocols, robust coordination mechanisms, and scalable management frameworks will pave 
+the way for autonomous networks.
+
+* Architecture
+
+Multi agent architecture can be extremely complex, but figure  {{figure-multi-agent}} tries to capture the main interwokring issues of this scenario.
+An example with an arbitrary number of agents (N) connecting to different components of the management and control stack 
+(SDN controllers, observability function, assurance function, and others) is provided. 
+
+~~~~         
+ 
+      |------------|         (A)           |------------|
+      |  Agent #1  | <-------------------->|  Agent #N  |
+      |------------|                       |------------|
+            |   |                           |  ^      |  
+            |   +------------------+    --- +  |      +--+                    
+            v                      |    |      |         |     
+      |---------------|            v    V      |         V
+      |   P-PNC(s),   |      |--------------|  |      |------------|
+      |   O-PNC(s),   |      | Observability|  |  ... | Assurance  |
+      |   MDSC        |      |              |  |      |            |
+      |---------------|      |--------------|  |      |------------|
+              ^                                |
+              |                                v
+    +---------|------------------------------------------------+
+    |                                                          |
+    |                      IP/Optical Network                  |          
+    |                                                          |
+    +----------------------------------------------------------+
+
+  Legend:
+  (A) Inter Agent comunication for coordination
+
+~~~~
+{: #figure-multi-agent title="Multi-agent architecture"}
+
+Alternatively, a hierarchical solution can be foreseen, with an agent (H-Agent) specifically
+designed for coordinating agents, or an agent designated to play the role of H-Agent in addition
+to its duties, as shown in {{figure-h-agent}}:
+
+~~~~         
+                        |------------|
+                        |  H-Agent   | 
+                        |------------| 
+                  (A)      |     |    (A)
+            +--------------+     +----------------+               
+            |                                     |
+            V                                     V
+      |------------|                       |------------|
+      |  Agent #1  |                       |  Agent #N  |
+      |------------|                       |------------|
+            |   |                           |  ^      |  
+            |   +------------------+    --- +  |      +--+                    
+            v                      |    |      |         |     
+      |---------------|            v    V      |         V
+      |   P-PNC(s),   |      |--------------|  |      |------------|
+      |   O-PNC(s),   |      | Observability|  |  ... | Assurance  |
+      |   MDSC        |      |              |  |      |            |
+      |---------------|      |--------------|  |      |------------|
+              ^                                |
+              |                                v
+    +---------|------------------------------------------------+
+    |                                                          |
+    |                      IP/Optical Network                  |          
+    |                                                          |
+    +----------------------------------------------------------+
+
+  Legend:
+  (A) H-Agent to Agent comunication 
+
+~~~~
+{: #figure-h-agent title="Multi-agent hierarchical architecture"}
+
+
+* Interfaces and APIs
+
+To be added.
+
+* Protocols
+
+To be added.
+
+* Data Models
+
+To be added.
+
+* Alignment with IETF
+
+To be added.
+
+## Network traffic management
+
+Flow placement, traffic engineering/steering along with network
+resource defragmentation are among important aspects of network
+operations that can benefit from artificial intelligence.
+
+Network routing protocols automate flow placement for best-effort
+traffic.  Traffic engineering and steering are commonly based on
+statistical analysis and historical trends of network traffic.  They
+are mostly implemented via configurations and tunnel setups, often
+employing scripts for automation purposes.
+
+While there are some proactive approach to network resource
+defragmentation, reactive methods are still quite common.  There are
+short-term approaches and longer-term views on employing AI to
+address traffic management. 
+
+### Short term approaches
+   
+In the short-term, AI models train on operator’s network traffic
+patterns and employ a set of APIs to connect to network configuration
+equipment in order to add, remove, and modify configurations and perform
+different traffic management related tasks. Model training can be either 
+off-line or on-line.
+
+Initially, AI models perform their inference tasks exclusively based
+on their training on historical network traffic patterns, and topology changes
+in a centralized manner.  In more advanced approaches, the models not only
+train on network traffic patterns, and network topology changes, but also 
+learn how to interpret and digest external events. This added capability allows
+the AI models to be more effective in performing their traffic management tasks.
+
+Generally speaking, IETF/IRTF can work on describing and providing synthetic networks
+along with synthetic traffic that can be used to train AI models. Furthermore, IETF/IRTF
+can also define and provide expected reasonable traffic flows. 
+
+
+#### Offline training
+
+During off-line training, external events, network monitoring information 
+(available via protocols such as SNMP), historical data from traffic engineering 
+databases, network topology changes, and other traffic-related data from the 
+operator's network are collected over time. This data is then used later 
+during the training and model performance evaluation process.
+
+There is potential to define a set of APIs to collect information or enable
+a query mechanism to pull the required training data, particularly for external events.
+
+Selecting the important features from the entire dataset is another crucial
+aspect of training.
+
+IETF/IRTF can certainly play a role in both of the above-mentioned cases.
+
+~~~~
++---------+     (A) + (B)                 
+| Outside |xxxxxxxx External xxxxxxxxx
+|  world  |          events          x
++---------+                          x
+                                     x
+                                     V
++-----------+              +--------------------+
+|  Network  |------------->|     Dataset        |
++-----------+              |    repository      |
+                           +--------------------+
+                           | Network monitoring |
+                           |       info.        |
+                           |   (e.g via SNMP)   |
+                           |         +          |
+                           |   Topology changes |
+                           |         +          |
+                           |   Historical data  |
+                           |   from TE-DB, etc. |
+                           +--------------------+
+                                     x
+                                     x (B)
+                                     x
+                                     V
+                               +------------+   
+                               |  AI model  |
+                               |   under    |
+                               |  training  |
+                               +------------+
+                             
+
+  Legend:
+  xxx Potential IETF defined and standardized interface.
+  (A) Extracting and storing outside world events data.
+  (B) Important features for training the model for traffic mgmt.
+
+~~~~ 
+{: #figure-off-line title="AI assisted traffic management: Offline training"} 
+
+
+#### Online training
+
+On-line training takes a more real-time approach. Here model training is based
+on processing data incrementally as it becomes available. This method is particularly
+suitable for scenarios such as network traffic management which require real-time
+learning and adaptation to changes. 
+
+A traffic management AI model under online training uses the same input sources as it
+does in offline training. However, unlike offline training, the data here is not stored
+in a repository but streamed into the training process. As such, the ground truth for model performance evaluation in online training is derived from observation of
+actual real time world events and network behavior, rather than stored data.
+The training process therefore requires a mechanism to extract important features from the stream of incoming real-time network data and outside world events. These extracted
+features are then fed to the training process for adjusting model's parameters in a dynamic manner.
+
+IETF/IRTF can work to standardize the mechanisms to identify important feature and implement the above mentioned required real-time data delivery and feature extraction.
+
+~~~~
++---------+     (A) + (B)              
+| Outside |xxxxxxxxxxxx External xxxxxxxxxxxxxxxx
+|  world  |              events                 x
++---------+                                     x
+                                                x
+                                                V
+                                          +------------+   
++-----------+          (A) + (B)          |  AI model  |
+|  Network  |xxxxxxxxxxxxxxxxxxxxxxxxxxxx>|   under    |
++-----------+                             |  training  |
+                                          +------------+
+                real-time stream of                                          
+                Network monitoring    
+                       info.          
+                  (e.g via SNMP)     
+                         +            
+                  Topology changes    
+                         +            
+                  Historical data    
+                  from TE-DB, etc.   
+                                      
+
+  Legend:
+  xxx Potential IETF defined and standardized interface.
+  (A) Extracting and storing outside world events data.
+  (B) Important features for training the model for traffic mgmt.
+
+~~~~ 
+{: #figure-online-line title="AI assisted traffic management: On-line training"} 
+
+### Inference
+Inference phase for traffic management requires an interface to translate AI model's
+output to a set of network operation tasks and configuration commands. With this
+information readily available, existing protocols such as NETCONF can be employed to
+manage the network.
+
+~~~~
+
++---------+     (A) + (B)              
+| Outside |xxxxxxxxxxxx External xxxxxxxxxxxxxxxx
+|  world  |              events                 x
++---------+                                     x
+                                                x
+                                                V
+                                          +------------+   
++-----------+          (A) + (B)          |  AI model  |
+|  Network  |xxxxxxxxxxxxxxxxxxxxxxxxxxxx>|     in     |
++-----------+                             |  operation |
+      ^                                   +------------+
+      |         real-time stream of             x                             
+      |         Network monitoring              x
+      |                info.                    x (C)
+      |            (e.g via SNMP)               x
+      |                  +                      V
+      |           Topology changes        +------------+
+      |                  +                | AI output  |
+      |               Data from           | to network |
+      |              TE-DB, etc.          | config     |
+      |                                   | translator |
+      |                                   +------------+
+      |                                         |
+      |                                         |
+      +----------- Configuration commands ------+
+
+
+  Legend:
+  xxx Potential IETF defined and standardized interface.
+  (A) Extracting and storing outside world events data.
+  (B) Important features for training the model for traffic mgmt.
+  (C) Standardized output of the AI model delivered for translation
+
+~~~~ 
+{: #figure-Inference title="AI assisted traffic management: Inference"}
+
+
+### Longer term view
+
+Over time, the full integration of AI models and network elements will transform networks from their current state into agent-based or Agentic networks. In a distributed version of Agentic networks, each node is accompanied by an AI agents. Once trained, these agents work together to address flow placement, traffic steering/engineering, and other network related tasks such as traffic management, network resource defragmentation, and even routing.
+
+While being different from networks managed by a set of interworking multi agents , the Agentic networks face some of the same challenges outlined in the multi agent interworking
+section of the document. However, in Agentic networks, distributed training of the agents and proper knowledge sharing between them can enhance their collective training performance and can potentially alleviate some of these difficulties. 
+
+In these networks, AI agents trained on local traffic patterns and external events will exchange knowledge and network state information through a set of protocols in a distributed manner in order to address network related tasks. Agentic networks will potentially offer highly automated, streamlined, and tunnel-less traffic management that is currently available only for best-effort traffic.
+
+
+In addition to the potential standardization opportunities outlined in the previous section, IETF/IRTF can alo play a role in defining and standardizing the followings: 
+
+- Training
+
+   - Mechanisms for distributed training and knowledge sharing
+   - Mechanisms for feeding traffic and overall network state information to agents for training purposes.
+   - Mechanisms for feeding external events information to agents during training. 
+
+- Inference
+
+   - Mechanisms for distributing agents' decisions and inference results.
+   - Mechanisms for feeding traffic and overall network state information to agents during inference phase.
+   - Mechanisms for feeding external events information to agents during inference phase. 
+
+
+- There is also potentially a need to define mechanisms to identify flow requirements to the agents during network operations.
+
+The following figure depicts an example of an Agentic network.
+
+~~~~
+
++---------+                  (C) + (D)                +---------+
+| Outside |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx| Network |
+| world   |   x                   x             x     |         |
++---------+   x                   x             x     +---------+
+              x                   x             x
+              x                   x             xxxxxxxxxx
+              x                   x                      x
+              V                   V                      V
+        +------------+      +------------+          +------------+
+    xxx>|  AI Agent  |  xxx>|  AI Agent  |      xxx>|  AI Agent  |
+    x   |------------|  x   +------------+ ...  x   +------------+
+    x   |            |  x   |            |      x   |            |
+    x   |   Node-1   |  x   |   Node-2   |      x   |   Node-n   | 
+    x   +------------+  x   +------------+      x   +------------+
+    x                   x                       x
+    x                   x                       x
+    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                       (A) + (B)
+
+ Legend: 
+  xxx Potential IETF defined and standardized interfaces
+  (A) APIs/Interfaces/Protocols for distributing training
+      and knowledge sharing.
+  (B) APIs/Interfaces/Protocols for distributing agents'
+      decisions and inference results.  
+  (C) APIs/Interfaces/Protocols for feeding regionally
+      observed traffic and network state info. to agents
+      for training and inference.
+  (D) APIs/Interfaces/Protocols for feeding regionally
+      observed external events info. to agents for
+      training and inference.
+
+~~~~
+{: #figure-Agentic-networks title="Distributed agentic networks"}
 
 * Architecture
 
