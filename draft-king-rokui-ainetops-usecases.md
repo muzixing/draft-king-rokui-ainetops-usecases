@@ -1331,10 +1331,12 @@ In a RAG based architecture, a knowledge base is created by using an embedding m
 
 ~~~~  
 
-As previously mentioned, the documents fed into the Vector Data Base for this specific use case, 
-correspond to any kind of Network Operation Documentation, which makes this kind of systems a 
-powerful tool that provides quick and efficient access to complex information, that can span different 
-areas like Network infrastructure, Standard Operating Procedures, Security documentation, Incident and change reports, etc.
+As previously mentioned, the documents stored in the Vector Database for this specific
+use case correspond to various types of Network Operation Documentation. Thus, this system
+serves as a powerful tool, offering quick and efficient access to complex
+information across different areas of the Network Operations landscape, including
+network infrastructure, Standard Operating Procedures, security documentation, 
+incident reports, and more.
 
 * Interfaces and APIs
 
