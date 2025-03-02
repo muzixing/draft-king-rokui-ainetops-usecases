@@ -2333,8 +2333,132 @@ Internet-Draft             AINetOps Use Cases              February 2025
 
 
 
+6.21.  AI-Driven Network Slicing Optimization
 
-6.21.  Other Use Cases
+   This use case leverages AI to optimize the creation, management, and
+   performance of network slices in 5G and beyond. By dynamically
+   allocating resources, predicting SLA violations, and coordinating
+   across multiple domains, AI ensures that each slice meets its
+   performance requirements while efficiently utilizing the underlying
+   physical infrastructure. This use case addresses both single-domain
+   (e.g., RAN) and multi-domain (e.g., RAN, transport, core) scenarios.
+
+   The AI system analyzes real-time telemetry (e.g., traffic patterns,
+   resource utilization), historical data, and external inputs (e.g.,
+   service requirements, network topology) to optimize network slices.
+   For example, AI can allocate additional bandwidth to a slice
+   experiencing high traffic or reroute traffic to prevent congestion.
+   If SLA violations are predicted, AI can take proactive measures
+   (e.g., scaling resources, adjusting configurations) to ensure
+   compliance.
+
+6.21.1.  Architecture
+
+   The architecture integrates an AI Network Slicing Optimization Engine
+   with the NSMF (Network Slice Management Function) and NSSMFs (Network
+   Slice Subnet Management Functions) for RAN, Core, and Transport
+   domains. Figure 16 illustrates this design, showing the AI engine
+   interfacing with the NSMF, which coordinates with the NSSMFs to
+   manage and optimize network slices. The engine collects telemetry,
+   predicts SLA violations, and provides optimization recommendations to
+   the NSMF, which implements changes via the NSSMFs.
+
+                                               |-------------------|
+                                               |  AI Network       |
+                                               |  Slicing          |
+                                               |  Optimization     |
+                                               |  Engine           |
+                                               |-------------------|
+                                                     ^      |
+                                                     |      v
+                                            (B)      |      | (C)
+                                      +--------------+      +--------------+
+                                      |                             |
+                                      v                             v
+                               |---------------|             |---------------|
+                               |   NSMF        |             |   NSSMFs      |
+                               |   (Network    |             |   (RAN, Core, |
+                               |   Slice Mgmt.)|             |   Transport)  |
+                               |---------------|             |---------------|
+                                      ^   |                   ^   |
+                                      |   |                   |   |
+                             (A)      |   |          (A)      |   |
+                     +----------------+   +-------------------+   |
+                     |                                            |
+                     |         +----------------------------------+
+                     |         |
+                     |         v
+             +-------|------------------------------------------------+
+             |                                                        |
+             |                   Physical Network Infrastructure      |
+             |                   (RAN, Core, Transport)               |
+             |                                                        |
+             +--------------------------------------------------------+
+
+     Legend:
+     (A) Optimization commands (e.g., adjust slice resources, reroute traffic)
+     (B) Telemetry feedback (e.g., slice performance, resource utilization)
+     (C) SLA compliance reports and alerts
+     NSMF: Network Slice Management Function
+     NSSMF: Network Slice Subnet Management Function (RAN, Core, Transport)
+
+     Figure 16: Corrected Architecture for AI-Driven Network Slicing Optimization
+
+6.21.2.  Interfaces and APIs
+
+   The AI engine interfaces with the NSMF using standard management and
+   telemetry APIs. The NSMF communicates with the NSSMFs using 3GPP-
+   defined interfaces (e.g., Nsmf_PDUSession_Create,
+   Nsmf_EventExposure_Subscribe). The AI engine collects telemetry via
+   gNMI or OpenConfig streams and provides optimization recommendations
+   to the NSMF via REST APIs.
+
+6.21.3.  Protocols
+
+   The protocols align with 3GPP and IETF standards. The NSMF and NSSMFs
+   use 3GPP-defined protocols (e.g., HTTP/2 for service-based
+   interfaces). For transport, protocols like PCEP (RFC 5440) and BGP
+   (RFC 4271) support traffic engineering adjustments. Telemetry
+   protocols like IPFIX (RFC 7011) or SNMP (RFC 3411) provide feedback,
+   with streaming alternatives (e.g., gNMI) preferred for real-time
+   needs.
+
+6.21.4.  Data Models
+
+   YANG models are central to representing slice configurations and
+   performance data. The Network Topology Model (RFC 8345) can be
+   extended to define slice parameters (e.g., latency, bandwidth) and
+   metrics (e.g., resource utilization, SLA compliance). 3GPP YANG
+   models for RAN, Core, and Transport support configuration and
+   telemetry. A new YANG model may standardize network slicing
+   optimization workflows.
+
+6.21.5.  Processes and Procedures
+
+   The process begins with AI training on historical traffic data, slice
+   configurations, and SLA requirements. Optimization runs continuously,
+   with operator oversight via an AIOps-Assistant (similar to 6.8).
+   Post-optimization, the AI evaluates slice performance, updates
+   configurations, and retrains as needed. Closed-loop automation
+   applies corrective actions, validated by telemetry.
+
+6.21.6.  Alignment with IETF and 3GPP
+
+   This use case aligns with 3GPP efforts in network slicing and IETF
+   efforts in network management and traffic engineering. The Operations
+   and Management Area Working Group (OPSAWG) supports telemetry for
+   slice performance metrics, while the Traffic Engineering Architecture
+   and Signaling (TEAS) working group’s work on path optimization (e.g.,
+   RFC 8453 for ACTN) enables slice-aware routing. Extensions to YANG
+   (NETMOD), PCEP (PCE), and telemetry standards (OPSAWG) could
+   standardize this use case, leveraging frameworks proposed in 6.17 and
+   6.18.
+```
+
+
+
+
+6.22.  Other Use Cases
 
    To be discussed and agreed.
 
