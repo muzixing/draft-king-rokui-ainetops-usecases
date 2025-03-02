@@ -1894,7 +1894,7 @@ Internet-Draft             AINetOps Use Cases              February 2025
                                |---------------|             |---------------|
                                       ^   |                   ^   |
                                       |   |                   |   |
-                             (A)      |   |          (A)     |   |
+                             (A)      |   |          (A)      |   |
                      +----------------+   +-------------------+   |
                      |                                            |
                      |                                            |
@@ -1979,7 +1979,241 @@ Internet-Draft             AINetOps Use Cases              February 2025
    interoperability across vendor implementations.
 
 
-6.18.  Other Use Cases
+
+
+
+
+6.18.  Energy Efficiency Optimization
+
+   This use case employs AI to optimize energy consumption across IP/optical
+   networks by dynamically adjusting network resources based on traffic
+   demand, equipment performance, and environmental conditions. With
+   routers, switches, and optical amplifiers contributing significantly to
+   power usage, AI-driven energy management reduces operational costs and
+   carbon footprints while maintaining performance and reliability. It
+   addresses both single-layer (IP or optical) and multi-layer (IP over
+   optical) scenarios.
+
+   The AI system analyzes real-time telemetry (e.g., power usage, link
+   utilization), historical patterns (e.g., peak/off-peak traffic), and
+   external factors (e.g., electricity costs, cooling needs) to identify
+   energy-saving opportunities. Actions include powering down idle ports,
+   rerouting traffic to consolidate active paths, tuning optical signal
+   parameters, or scheduling high-energy tasks during low-cost periods. For
+   instance, during off-peak hours, the AI might deactivate redundant IP
+   interfaces or reduce optical amplifier gain, ensuring SLAs are met with
+   minimal power draw.
+
+6.18.1.  Architecture
+
+   The architecture for energy efficiency optimization mirrors the
+   centralized design used for AI-Driven Resilience Testing (see Section
+   6.17). Figure 12 illustrates this, with the AI Energy Optimization
+   Engine replacing the AI Fault Injection Engine, interfacing with
+   Physical Packet Network Controllers (P-PNC) and Optical Physical Network
+   Controllers (O-PNC) to manage the IP/optical network. The engine
+   collects telemetry and external data, computes energy-efficient
+   configurations, and applies them via controller APIs. In this context,
+   (A) represents energy optimization commands (e.g., power down ports,
+   adjust signal gain), (B) denotes telemetry feedback (e.g., power usage,
+   traffic load), and (C) indicates configuration updates (e.g., reroute
+   traffic, schedule operations).
+
+
+
+6.18.2.  Interfaces and APIs
+
+   The interfaces and APIs are largely identical to those in Section 6.17,
+   adapted for energy optimization. NETCONF (RFC 6241) or RESTCONF (RFC
+   8040) delivers commands to adjust power states or reroute traffic, while
+   gNMI or OpenConfig streams provide real-time telemetry (e.g., power
+   consumption, utilization). External inputs, such as electricity pricing
+   or weather data, integrate via REST APIs to inform optimization,
+   consistent with the approach in 6.17.
+
+6.18.3.  Protocols
+
+   The protocols align closely with those in Section 6.17, tailored for
+   energy goals. PCEP (RFC 5440) supports traffic rerouting to consolidate
+   paths, reducing energy use. BGP (RFC 4271) or OSPF (RFC 2328) adjustments
+   optimize routing efficiency. For optical layers, OTN (G.709) signaling
+   tunes power settings (e.g., lowering laser output). Telemetry protocols
+   like IPFIX (RFC 7011) or SNMP (RFC 3411) provide feedback, with streaming
+   alternatives (e.g., gNMI) preferred for real-time needs, as noted in
+   6.18.
+
+6.18.4.  Data Models
+
+   YANG models for energy optimization build on those in Section 6.17. The
+   Network Topology Model (RFC 8345) can be augmented to define
+   energy-specific parameters (e.g., power states, utilization thresholds)
+   and metrics (e.g., watts consumed, energy cost), extending the
+   fault-related models from 6.18. OpenConfig models for interfaces and
+   optical transport support power adjustments and telemetry, with a
+   potential new YANG model to standardize energy efficiency policies.
+
+6.18.5.  Processes and Procedures
+
+   The process begins with AI training on historical energy usage, traffic
+   patterns, and cost data, using reinforcement learning for policy
+   optimization and time-series analysis for demand forecasting.
+   Optimization runs continuously or on a schedule, with operator oversight
+   via an AIOps-Assistant (similar to 6.8). Post-optimization, the AI
+   evaluates energy savings against performance impacts, updating policies
+   and retraining as needed. Closed-loop automation applies adjustments,
+   validated by telemetry, following the workflow principles in 6.17.
+
+6.18.6.  Alignment with IETF
+
+   This use case aligns with IETF efforts in sustainability and network
+   management, paralleling 6.17’s standardization ties. The Operations and
+   Management Area Working Group (OPSAWG) supports telemetry and efficiency
+   metrics, while the Traffic Engineering Architecture and Signaling (TEAS)
+   working group’s path optimization work (e.g., RFC 8453 for ACTN) enables
+   energy-efficient rerouting. Extensions to YANG (NETMOD), PCEP (PCE), and
+   telemetry standards (OPSAWG) could standardize energy optimization,
+   leveraging the same frameworks proposed in 6.17.
+
+
+
+
+
+6.19.  AI-Driven Green Energy Optimization
+
+   This use case leverages AI to optimize network and compute operations by
+   prioritizing resources powered by green energy sources (e.g., solar,
+   wind) over conventional ones, while ensuring performance requirements
+   (e.g., latency, throughput) are met. As networks increasingly rely on
+   distributed compute elements like Virtual Network Functions (VNFs) or
+   edge servers, selecting energy sources for these workloads impacts both
+   sustainability and cost. This applies to single-layer (e.g., IP compute
+   nodes) and multi-layer (e.g., IP over optical with compute) scenarios.
+
+   The AI system analyzes real-time telemetry (e.g., latency, traffic load),
+   energy source data (e.g., green vs. conventional availability), and
+   external factors (e.g., renewable energy forecasts) to decide where and
+   how to execute compute tasks. For example, in a mobile core network, a
+   media optimizer VNF processing mobility traffic could be instantiated on
+   a green-energy-powered server in a specific NFVi Point of Delivery (PoD)
+   or datacenter instead of a conventionally powered one, provided latency
+   SLAs are not violated. If green resources are unavailable or
+   insufficient, the AI shifts workloads or adjusts traffic paths
+   dynamically, balancing sustainability with service quality.
+
+6.19.1.  Architecture
+
+   The architecture integrates an AI Green Energy Optimization Engine with
+   both compute orchestration and network control layers to manage workload
+   placement and traffic across IP/optical networks and NFVi PoDs or
+   datacenters. Figure 14 illustrates this design, showing the AI engine
+   interfacing with an NFV Orchestrator (NFVO) to shift compute jobs (e.g.,
+   VNFs) between PoDs/datacenters based on green energy availability, and
+   optionally with Physical Packet Network Controllers (P-PNC) and Optical
+   Physical Network Controllers (O-PNC) for traffic adjustments. The engine
+   collects telemetry and energy data, computes optimal configurations, and
+   applies them via orchestration and controller APIs.
+
+                                               |-------------------|
+                                               |  AI Green Energy  |
+                                               |  Optimization     |
+                                               |  Engine           |
+                                               |-------------------|
+                                                     ^      |
+                                                     |      v
+                                            (B)      |      | (C)
+                                      +--------------+      +--------------+
+                                      |                             |
+                                      v                             v
+                               |---------------|             |---------------|
+                               |   NFVO        |             |   P-PNC(s)    |
+                               |   (Compute    |             |   O-PNC(s)    |
+                               |   Orchestr.)  |             |   (Network)   |
+                               |---------------|             |---------------|
+                                      ^   |                   ^   |
+                                      |   |                   |   |
+                             (A)      |   |          (A)      |   |
+                     +----------------+   +-------------------+   |
+                     |                                            |
+                     |         +----------------------------------+
+                     |         |
+                     |         v
+             +-------|------------------------------------------------+
+             |                                                        |
+             |     NFVi PoDs / Datacenters + IP/Optical Network       |
+             |                                                        |
+             +--------------------------------------------------------+
+
+     Legend:
+     (A) Optimization commands (e.g., instantiate VNF on green PoD, reroute traffic)
+     (B) Telemetry feedback (e.g., latency, energy source, compute load)
+     (C) Configuration updates (e.g., shift VNFs, adjust network paths)
+     NFVO: Network Function Virtualization Orchestrator
+     P-PNC: Physical Packet Network Controller
+     O-PNC: Optical Physical Network Controller
+
+     Figure 14: Architecture for AI-Driven Green Energy Optimization
+
+6.19.2.  Interfaces and APIs
+
+   Interfaces extend those in Sections 6.17 and 6.18, with a focus on
+   compute orchestration. The NFVO uses ETSI NFV MANO APIs (e.g., Os-Ma-nfvo
+   reference point) to instantiate or migrate VNFs across NFVi PoDs/
+   datacenters based on green energy availability. NETCONF (RFC 6241) or
+   RESTCONF (RFC 8040) manages traffic adjustments via P-PNC/O-PNC when
+   needed, while gNMI or OpenConfig streams provide telemetry (e.g.,
+   latency, server energy type). REST APIs integrate external data like
+   green energy availability or weather forecasts, consistent with 6.17.
+
+6.19.3.  Protocols
+
+   Protocols align with Sections 6.17 and 6.18, with additions for compute
+   management. PCEP (RFC 5440) enables traffic rerouting to align with
+   green-energy-powered nodes, while BGP (RFC 4271) or OSPF (RFC 2328)
+   adjusts routing paths. OTN (G.709) signaling supports optical
+   adjustments if involved. For compute, ETSI NFV protocols (e.g.,
+   VE-Vnfm-vnf for VNF management) complement network protocols. Telemetry
+   uses IPFIX (RFC 7011) or SNMP (RFC 3411), with streaming options (e.g.,
+   gNMI) preferred, as in 6.17.
+
+6.19.4.  Data Models
+
+   YANG models build on Sections 6.17 and 6.18, with compute-specific
+   extensions. The Network Topology Model (RFC 8345) can be augmented to
+   include NFVi PoD/datacenter attributes (e.g., energy source, compute
+   capacity) and metrics (e.g., carbon footprint, latency). OpenConfig
+   models for interfaces and ETSI NFV YANG models (e.g., for VNF
+   descriptors) support configuration and telemetry. A new YANG model may
+   standardize green energy optimization across network and compute domains.
+
+6.19.5.  Processes and Procedures
+
+   The process starts with AI training on historical traffic, latency, and
+   energy source data, using reinforcement learning to optimize green
+   energy use and predictive models for renewable availability.
+   Optimization runs continuously, shifting VNFs to green PoDs/datacenters
+   or adjusting traffic when viable, with operator oversight via an AIOps-
+   Assistant (similar to 6.8). Post-optimization, the AI assesses
+   sustainability gains against performance, updating policies and
+   retraining. Closed-loop automation adjusts configurations, validated by
+   telemetry, following 6.18’s workflow.
+
+6.19.6.  Alignment with IETF
+
+   This use case aligns with IETF’s sustainability and compute-network
+   integration efforts. The Operations and Management Area Working Group
+   (OPSAWG) supports telemetry for energy metrics, while the Computing in
+   the Network Research Group (COINRG) and Network Function Virtualization
+   Research Group (NFVRG) address compute placement, applicable to VNFs.
+   The Traffic Engineering Architecture and Signaling (TEAS) working
+   group’s efforts (e.g., RFC 8453 for ACTN) enable green-energy-aware
+   routing. Extensions to YANG (NETMOD), PCEP (PCE), and telemetry
+   standards (OPSAWG) could standardize this, leveraging 6.17 and 6.18
+   frameworks.
+
+
+
+
+6.20.  Other Use Cases
 
    To be discussed and agreed.
 
