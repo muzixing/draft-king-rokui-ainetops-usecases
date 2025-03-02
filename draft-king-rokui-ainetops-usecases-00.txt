@@ -1839,12 +1839,41 @@ Internet-Draft             AINetOps Use Cases              February 2025
 
 
 
-6.17.   AI-Driven Resilience Testing
-This use case leverages AI to design and execute fault injection scenarios that test the resilience of IP/optical networks under simulated failure conditions. By proactively introducing controlled disruptions—such as packet drops, latency spikes, or optical signal degradation—AI assesses the network's ability to detect, respond, and recover from faults. This approach enhances network robustness by identifying weaknesses and validating automated recovery mechanisms before real failures occur, addressing both single-layer (IP or optical) and multi-layer (IP over optical) scenarios.
-The AI system analyzes historical failure data (e.g., fiber cuts, equipment outages), real-time telemetry (e.g., latency, BER), and external factors (e.g., weather events, traffic surges) to model probable failure points. It then injects faults, monitors the network’s response, and refines recovery strategies, potentially in a closed-loop manner. For example, an AI model might predict a high-risk optical link based on trending attenuation, simulate a fiber cut, and evaluate whether IP-layer rerouting maintains SLAs. If recovery is suboptimal, it suggests adjustments (e.g., updating TE policies) and retests.
+6.17.  AI-Driven Resilience Testing
 
-    Architecture:
-    The architecture integrates an AI Fault Injection Engine with network controllers and elements to simulate faults and assess resilience across IP and optical layers. Figure 12 illustrates this design, showing the AI Fault Injection Engine interfacing with packet (P-PNC) and optical (O-PNC) Physical Network Controllers, which manage the IP/optical network. The engine designs fault scenarios, injects them via controller APIs, collects telemetry feedback, and triggers recovery actions as needed. This centralized approach leverages existing IETF control-plane components, ensuring compatibility with multi-layer coordination frameworks like ACTN.
+   This use case leverages AI to design and execute fault injection
+   scenarios that test the resilience of IP/optical networks under
+   simulated failure conditions. By proactively introducing controlled
+   disruptions—such as packet drops, latency spikes, or optical signal
+   degradation—AI assesses the network's ability to detect, respond, and
+   recover from faults. This approach enhances network robustness by
+   identifying weaknesses and validating automated recovery mechanisms
+   before real failures occur, addressing both single-layer (IP or
+   optical) and multi-layer (IP over optical) scenarios.
+
+   The AI system analyzes historical failure data (e.g., fiber cuts,
+   equipment outages), real-time telemetry (e.g., latency, BER), and
+   external factors (e.g., weather events, traffic surges) to model
+   probable failure points. It then injects faults, monitors the
+   network’s response, and refines recovery strategies, potentially in a
+   closed-loop manner. For example, an AI model might predict a high-risk
+   optical link based on trending attenuation, simulate a fiber cut, and
+   evaluate whether IP-layer rerouting maintains SLAs. If recovery is
+   suboptimal, it suggests adjustments (e.g., updating TE policies) and
+   retests.
+
+6.17.1.  Architecture
+
+   The architecture integrates an AI Fault Injection Engine with network
+   controllers and elements to simulate faults and assess resilience
+   across IP and optical layers. Figure 12 illustrates this design,
+   showing the AI Fault Injection Engine interfacing with packet (P-PNC)
+   and optical (O-PNC) Physical Network Controllers, which manage the
+   IP/optical network. The engine designs fault scenarios, injects them
+   via controller APIs, collects telemetry feedback, and triggers
+   recovery actions as needed. This centralized approach leverages
+   existing IETF control-plane components, ensuring compatibility with
+   multi-layer coordination frameworks like ACTN.
 
                                                |-------------------|
                                                |  AI Fault         |
@@ -1879,25 +1908,75 @@ The AI system analyzes historical failure data (e.g., fiber cuts, equipment outa
              |                                                        |
              +--------------------------------------------------------+
 
-Legend:
-(A) Fault injection commands (e.g., disable link, drop packets, degrade signal)
-(B) Telemetry feedback (e.g., latency, packet loss, BER)
-(C) Recovery actions (e.g., reroute traffic, adjust optical parameters)
-P-PNC: Physical Packet Network Controller
-O-PNC: Optical Physical Network Controller
+     Legend:
+     (A) Fault injection commands (e.g., disable link, drop packets, degrade signal)
+     (B) Telemetry feedback (e.g., latency, packet loss, BER)
+     (C) Recovery actions (e.g., reroute traffic, adjust optical parameters)
+     P-PNC: Physical Packet Network Controller
+     O-PNC: Optical Physical Network Controller
 
-Figure 12: Architecture for AI-Driven Resilience Testing
+     Figure 12: Architecture for AI-Driven Resilience Testing
 
-    Interfaces and APIs:
-    The AI Fault Injection Engine interfaces with network controllers using standard management and telemetry APIs. NETCONF (RFC 6241) or RESTCONF (RFC 8040) enables fault injection by sending commands to disable interfaces, drop packets, or adjust optical parameters (e.g., signal power). Real-time telemetry is collected via gNMI (gRPC Network Management Interface) or OpenConfig streams, providing metrics like latency, packet loss, and Bit Error Rate (BER). External data sources (e.g., weather APIs, threat intelligence feeds) may integrate via REST APIs to enrich fault scenario design.
-    Protocols:
-    Several IETF protocols support this use case. PCEP (RFC 5440) extensions could enable dynamic path recomputation during fault scenarios, testing traffic engineering resilience. BGP (RFC 4271) or OSPF (RFC 2328) adjustments validate routing protocol stability under simulated failures. For optical layers, OTN (G.709) or ASON (G.8080) signaling protocols facilitate fault injection (e.g., simulating fiber cuts). Telemetry protocols like IPFIX (RFC 7011) or SNMP (RFC 3411) provide feedback data, though streaming alternatives (e.g., gNMI) are preferred for real-time needs.
-    Data Models:
-    YANG models are central to representing fault injection and resilience data. The base Network Topology Model (RFC 8345) can be extended with new YANG modules to define fault parameters (e.g., failure type, duration, scope) and resilience metrics (e.g., recovery time, SLA compliance). OpenConfig YANG models for interfaces (e.g., openconfig-interfaces) and optical transport (e.g., openconfig-terminal-device) support fault execution and telemetry collection. A new YANG model may be needed to standardize fault injection workflows and outcomes.
-    Processes and Procedures:
-    The process begins with AI training on historical failure data, synthetic scenarios, and real-time network state, using ML techniques like supervised learning for fault prediction and reinforcement learning for recovery optimization. Fault injection tests are scheduled (e.g., off-peak) or triggered on-demand, with operator oversight via an AIOps-Assistant interface (similar to 6.8). Post-test analysis generates reports on resilience gaps, updates network policies (e.g., QoS, routing), and refines the AI model’s training dataset. Closed-loop automation may execute recovery actions autonomously, validated by subsequent tests.
-    Alignment with IETF:
-    This use case aligns with ongoing IETF efforts in multiple working groups. The Network Management Research Group (NMRG) explores AI applications in networking, providing a foundation for fault injection methodologies. The Traffic Engineering Architecture and Signaling (TEAS) working group’s work on resilience and path computation (e.g., RFC 8453 for ACTN) supports multi-layer testing. Extensions to YANG (NETMOD), PCEP (PCE), and telemetry protocols (OPSAWG) could standardize fault injection and resilience assessment, fostering interoperability across vendor implementations.
+6.17.2.  Interfaces and APIs
+
+   The AI Fault Injection Engine interfaces with network controllers
+   using standard management and telemetry APIs. NETCONF (RFC 6241) or
+   RESTCONF (RFC 8040) enables fault injection by sending commands to
+   disable interfaces, drop packets, or adjust optical parameters (e.g.,
+   signal power). Real-time telemetry is collected via gNMI (gRPC Network
+   Management Interface) or OpenConfig streams, providing metrics like
+   latency, packet loss, and Bit Error Rate (BER). External data sources
+   (e.g., weather APIs, threat intelligence feeds) may integrate via REST
+   APIs to enrich fault scenario design.
+
+6.17.3.  Protocols
+
+   Several IETF protocols support this use case. PCEP (RFC 5440)
+   extensions could enable dynamic path recomputation during fault
+   scenarios, testing traffic engineering resilience. BGP (RFC 4271) or
+   OSPF (RFC 2328) adjustments validate routing protocol stability under
+   simulated failures. For optical layers, OTN (G.709) or ASON (G.8080)
+   signaling protocols facilitate fault injection (e.g., simulating fiber
+   cuts). Telemetry protocols like IPFIX (RFC 7011) or SNMP (RFC 3411)
+   provide feedback data, though streaming alternatives (e.g., gNMI) are
+   preferred for real-time needs.
+
+6.17.4.  Data Models
+
+   YANG models are central to representing fault injection and resilience
+   data. The base Network Topology Model (RFC 8345) can be extended with
+   new YANG modules to define fault parameters (e.g., failure type,
+   duration, scope) and resilience metrics (e.g., recovery time, SLA
+   compliance). OpenConfig YANG models for interfaces (e.g.,
+   openconfig-interfaces) and optical transport (e.g.,
+   openconfig-terminal-device) support fault execution and telemetry
+   collection. A new YANG model may be needed to standardize fault
+   injection workflows and outcomes.
+
+6.17.5.  Processes and Procedures
+
+   The process begins with AI training on historical failure data,
+   synthetic scenarios, and real-time network state, using ML techniques
+   like supervised learning for fault prediction and reinforcement
+   learning for recovery optimization. Fault injection tests are
+   scheduled (e.g., off-peak) or triggered on-demand, with operator
+   oversight via an AIOps-Assistant interface (similar to 6.8). Post-test
+   analysis generates reports on resilience gaps, updates network
+   policies (e.g., QoS, routing), and refines the AI model’s training
+   dataset. Closed-loop automation may execute recovery actions
+   autonomously, validated by subsequent tests.
+
+6.17.6.  Alignment with IETF
+
+   This use case aligns with ongoing IETF efforts in multiple working
+   groups. The Network Management Research Group (NMRG) explores AI
+   applications in networking, providing a foundation for fault injection
+   methodologies. The Traffic Engineering Architecture and Signaling
+   (TEAS) working group’s work on resilience and path computation (e.g.,
+   RFC 8453 for ACTN) supports multi-layer testing. Extensions to YANG
+   (NETMOD), PCEP (PCE), and telemetry protocols (OPSAWG) could
+   standardize fault injection and resilience assessment, fostering
+   interoperability across vendor implementations.
 
 
 6.18.  Other Use Cases
