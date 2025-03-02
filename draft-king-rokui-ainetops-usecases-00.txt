@@ -2213,7 +2213,128 @@ Internet-Draft             AINetOps Use Cases              February 2025
 
 
 
-6.20.  Other Use Cases
+
+6.20.  AI-Driven Policy Enforcement and Compliance Auditing
+
+   This use case leverages AI to automate the enforcement of network
+   policies and auditing of compliance with regulatory standards and
+   internal guidelines. By continuously monitoring network configurations,
+   traffic, and security postures, AI ensures that policies are
+   consistently applied and compliance requirements are met. This use case
+   addresses both single-layer (e.g., IP) and multi-layer (e.g., IP over
+   optical) scenarios, as well as cross-domain environments.
+
+   The AI system analyzes real-time telemetry (e.g., configuration
+   changes, traffic flows, security logs), historical data, and external
+   inputs (e.g., regulatory updates, threat intelligence) to enforce
+   policies and audit compliance. For example, AI can detect unauthorized
+   changes to firewall rules, enforce encryption standards for sensitive
+   data, or ensure that network configurations align with GDPR
+   requirements. If violations are detected, AI can automatically
+   remediate issues or alert operators for manual intervention.
+
+6.20.1.  Architecture
+
+   The architecture integrates an AI Policy Enforcement and Compliance
+   Engine with network controllers, security systems, and orchestration
+   platforms. Figure 15 illustrates this design, showing the AI engine
+   interfacing with Physical Packet Network Controllers (P-PNC), Optical
+   Physical Network Controllers (O-PNC), and Security Information and
+   Event Management (SIEM) systems. The engine collects telemetry,
+   enforces policies, and audits compliance, applying corrective actions
+   via controller APIs.
+
+                                               |-------------------|
+                                               |  AI Policy        |
+                                               |  Enforcement &    |
+                                               |  Compliance Engine|
+                                               |-------------------|
+                                                     ^      |
+                                                     |      v
+                                            (B)      |      | (C)
+                                      +--------------+      +--------------+
+                                      |                             |
+                                      v                             v
+                               |---------------|             |---------------|
+                               |   P-PNC(s)    |             |   O-PNC(s)    |
+                               |   (IP Layer)  |             |   (Opt Layer) |
+                               |---------------|             |---------------|
+                                      ^   |                   ^   |
+                                      |   |                   |   |
+                             (A)      |   |          (A)     |   |
+                     +----------------+   +-------------------+   |
+                     |                                            |
+                     |         +----------------------------------+
+                     |         |
+                     |         v
+             +-------|------------------------------------------------+
+             |                                                        |
+             |                   IP/Optical Network                   |
+             |                                                        |
+             +--------------------------------------------------------+
+
+     Legend:
+     (A) Policy enforcement commands (e.g., block traffic, adjust QoS)
+     (B) Telemetry feedback (e.g., configuration changes, security logs)
+     (C) Compliance reports and alerts
+     P-PNC: Physical Packet Network Controller
+     O-PNC: Optical Physical Network Controller
+
+     Figure 15: Architecture for AI-Driven Policy Enforcement and Compliance Auditing
+
+6.20.2.  Interfaces and APIs
+
+   The AI engine interfaces with network controllers and security systems
+   using standard management and telemetry APIs. NETCONF (RFC 6241) or
+   RESTCONF (RFC 8040) delivers policy enforcement commands, while gNMI or
+   OpenConfig streams provide real-time telemetry (e.g., configuration
+   changes, traffic flows). SIEM systems integrate via REST APIs to
+   provide security logs and threat intelligence.
+
+6.20.3.  Protocols
+
+   The protocols align with existing IETF standards. PCEP (RFC 5440)
+   supports traffic engineering adjustments to enforce QoS policies, while
+   BGP (RFC 4271) or OSPF (RFC 2328) ensures routing compliance. For
+   security, protocols like IPsec (RFC 4301) and TLS (RFC 8446) enforce
+   encryption standards. Telemetry protocols like IPFIX (RFC 7011) or SNMP
+   (RFC 3411) provide feedback, with streaming alternatives (e.g., gNMI)
+   preferred for real-time needs.
+
+6.20.4.  Data Models
+
+   YANG models are central to representing policies and compliance data.
+   The Network Topology Model (RFC 8345) can be extended to define policy
+   parameters (e.g., access control, encryption) and compliance metrics
+   (e.g., audit logs, violation counts). OpenConfig YANG models for
+   interfaces and security support configuration and telemetry. A new YANG
+   model may standardize policy enforcement and compliance workflows.
+
+6.20.5.  Processes and Procedures
+
+   The process begins with AI training on historical configuration data,
+   security logs, and regulatory requirements. Policy enforcement runs
+   continuously, with operator oversight via an AIOps-Assistant (similar
+   to 6.8). Post-audit, the AI generates compliance reports, updates
+   policies, and retrains as needed. Closed-loop automation applies
+   corrective actions, validated by telemetry.
+
+6.20.6.  Alignment with IETF
+
+   This use case aligns with IETF efforts in network management, security,
+   and policy enforcement. The Operations and Management Area Working
+   Group (OPSAWG) supports telemetry for compliance metrics, while the
+   Security Area Working Group (SEC) addresses policy enforcement.
+   Extensions to YANG (NETMOD), PCEP (PCE), and telemetry standards
+   (OPSAWG) could standardize this use case, leveraging frameworks
+   proposed in 6.17 and 6.18.
+
+
+
+
+
+
+6.21.  Other Use Cases
 
    To be discussed and agreed.
 
