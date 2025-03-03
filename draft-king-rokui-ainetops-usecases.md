@@ -928,7 +928,7 @@ AI improves intrusion detection systems (IDS) and intrusion prevention
 systems (IPS) by enhancing accuracy and reducing false positives. It
 achieves this through behavioral analysis, which identifies unauthorized
 access or suspicious activities, and automated responses that isolate
-compromised devices or block malicious IP addresses. Additionally, AI’s
+compromised devices or block malicious IP addresses. Additionally, AI's
 adaptive learning capabilities ensure continuous updates to address new
 threats in dynamic environments.
 
@@ -1085,7 +1085,7 @@ For every use case described, the following dimensions are examined to provide a
 
    Unlike reactive and active assurance, proactive assurance does not wait for a fault to occur in the IP/Optical network. Instead, the network is continuously monitored through a series of trending and forecasting processes designed to detect early signs of deterioration that may eventually lead to faults.
     
-   As illustrated in {{figure-proactive-assurance}}, achieving proactive assurance involves running multiple processes that continuously monitor network performance. These processes collect and analyze a wide array of network telemetry data—including performance monitoring (PM) data, alarms, logs, network topology, and inventory details (Step A). By employing various techniques including advanced AI/ML algorithms, these processes provide real-time trending and forecasting insights, identifying patterns and anomalies that could indicate potential degradation (Step B).
+   As illustrated in {{figure-proactive-assurance}}, achieving proactive assurance involves running multiple processes that continuously monitor network performance. These processes collect and analyze a wide array of network telemetry data-including performance monitoring (PM) data, alarms, logs, network topology, and inventory details (Step A). By employing various techniques including advanced AI/ML algorithms, these processes provide real-time trending and forecasting insights, identifying patterns and anomalies that could indicate potential degradation (Step B).
     
    When these background processes detect any signs of deterioration or anomalous behavior, they trigger the AIOps-Assistant for further investigation (Step C). The AIOps-Assistant then leverages a Gen-AI multi-agent framework to initiate the assurance and troubleshooting procedures. In Step D, a dynamic workflow is executed to thoroughly diagnose the emerging issue and identify potential root causes. Optionally, at Step E, the Gen-AI dynamic workflow can recommend remedial actions to resolve the identified issues. These recommendations can be implemented in a closed-loop fashion, ensuring automated network recovery and continuous improvement of network performance. This proactive approach not only mitigates the risk of unexpected network faults but also optimizes operational efficiency by addressing issues before they escalate into service-impacting events.
     
@@ -1364,7 +1364,7 @@ More to be added.
 
 * Interfaces and APIs
 
-   The Path Computation Element (PCE) is a fundamental component of a Software Defined Networking (SDN) system, responsible for computing optimal traffic paths and dynamically adjusting them based on network conditions or demand. Originally designed for deriving paths for MPLS, and GMPLS, Label Switched Paths (LSPs), PCE delivers these computed routes to the LSP’s head end via the Path Computation Element Communication Protocol (PCEP).
+   The Path Computation Element (PCE) is a fundamental component of a Software Defined Networking (SDN) system, responsible for computing optimal traffic paths and dynamically adjusting them based on network conditions or demand. Originally designed for deriving paths for MPLS, and GMPLS, Label Switched Paths (LSPs), PCE delivers these computed routes to the LSP's head end via the Path Computation Element Communication Protocol (PCEP).
 
    The PCE architecture {{!RFC4655}} enables efficient path computation for traffic-engineered networks by offloading complex calculations to a dedicated entity. Stateful PCE {{!RFC8051}} and {{!RFC8231}} extends the PCE framework by maintaining real-time network state awareness, allowing dynamic path optimization across layers. The Hierarchical PCE (H-PCE) {{!RFC6805}} architecture supports multi-layer and multi-domain path computation by allowing collaboration between multiple PCEs.
 
@@ -1519,7 +1519,7 @@ While there are some proactive approach to network resource defragmentation, rea
 
 ### Short term approaches
    
-   In the short-term, AI models train on operator’s network traffic patterns and employ a set of APIs to connect to network configuration equipment in order to add, remove, and modify configurations and perform different traffic management related tasks. Model training can be either off-line or on-line.
+   In the short-term, AI models train on operator's network traffic patterns and employ a set of APIs to connect to network configuration equipment in order to add, remove, and modify configurations and perform different traffic management related tasks. Model training can be either off-line or on-line.
 
    Initially, AI models perform their inference tasks exclusively based on their training on historical network traffic patterns, and topology changes in a centralized manner.  In more advanced approaches, the models not only train on network traffic patterns, and network topology changes, but also  learn how to interpret and digest external events. This added capability allows the AI models to be more effective in performing their traffic management tasks.
 
@@ -1721,18 +1721,18 @@ More to be added.
 This use case leverages AI to design and execute fault injection
    scenarios that test the resilience of IP/optical networks under
    simulated failure conditions. By proactively introducing controlled
-   disruptions—such as packet drops, latency spikes, or optical signal
-   degradation—AI assesses the network's ability to detect, respond, and
-   recover from faults. This approach enhances network robustness by
-   identifying weaknesses and validating automated recovery mechanisms
-   before real failures occur, addressing both single-layer (IP or
-   optical) and multi-layer (IP over optical) scenarios.
+   disruptions-such as packet drops, latency spikes, or optical signal
+   degradation-AI assesses the network's ability to detect, respond, 
+   and recover from faults. This approach enhances network robustness 
+   by identifying weaknesses and validating automated recovery 
+   mechanisms before real failures occur, addressing both single-layer
+   (IP or optical) and multi-layer (IP over optical) scenarios.
 
 The AI system analyzes historical failure data (e.g., fiber cuts,
    equipment outages), real-time telemetry (e.g., latency, BER), and
    external factors (e.g., weather events, traffic surges) to model
    probable failure points. It then injects faults, monitors the
-   network’s response, and refines recovery strategies, potentially in a
+   network's response, and refines recovery strategies, potentially in a
    closed-loop manner. For example, an AI model might predict a high-risk
    optical link based on trending attenuation, simulate a fiber cut, and
    evaluate whether IP-layer rerouting maintains SLAs. If recovery is
@@ -1743,8 +1743,9 @@ The AI system analyzes historical failure data (e.g., fiber cuts,
 
    The architecture integrates an AI Fault Injection Engine with network
    controllers and elements to simulate faults and assess resilience
-   across IP and optical layers. {{architecture_for_ai_derive_resilience}} illustrates this design,
-   showing the AI Fault Injection Engine interfacing with P-PNC, O-PNC network controllers, which manage the
+   across IP and optical layers. {{architecture_for_ai_derive_resilience}}
+   illustrates this design, showing the AI Fault Injection Engine
+   interfacing with P-PNC, O-PNC network controllers, which manage the
    IP/optical network. The engine designs fault scenarios, injects them
    via controller APIs, collects telemetry feedback, and triggers
    recovery actions as needed. This centralized approach leverages
@@ -1832,7 +1833,7 @@ Legend:
    scheduled (e.g., off-peak) or triggered on-demand, with operator
    oversight via an AIOps-Assistant interface (similar to 6.8). Post-test
    analysis generates reports on resilience gaps, updates network
-   policies (e.g., QoS, routing), and refines the AI model’s training
+   policies (e.g., QoS, routing), and refines the AI model's training
    dataset. Closed-loop automation may execute recovery actions
    autonomously, validated by subsequent tests.
 
@@ -1842,7 +1843,7 @@ Legend:
    groups. The Network Management Research Group (NMRG) explores AI
    applications in networking, providing a foundation for fault injection
    methodologies. The Traffic Engineering Architecture and Signaling
-   (TEAS) working group’s work on resilience and path computation (e.g.,
+   (TEAS) working group's work on resilience and path computation (e.g.,
    RFC 8453 for ACTN) supports multi-layer testing. Extensions to YANG
    (NETMOD), PCEP (PCE), and telemetry protocols (OPSAWG) could
    standardize fault injection and resilience assessment, fostering
@@ -1932,7 +1933,7 @@ Legend:
    management, paralleling {{ai_drive_resilience_testing}} standardization ties. The Operations and
    Management Area Working Group (OPSAWG) supports telemetry and efficiency
    metrics, while the Traffic Engineering Architecture and Signaling (TEAS)
-   working group’s path optimization work (e.g., RFC 8453 for ACTN) enables
+   working group's path optimization work (e.g., RFC 8453 for ACTN) enables
    energy-efficient rerouting. Extensions to YANG (NETMOD), PCEP (PCE), and
    telemetry standards (OPSAWG) could standardize energy optimization,
    leveraging the same frameworks proposed in {{ai_drive_resilience_testing}}.
@@ -1964,12 +1965,12 @@ Legend:
    The architecture integrates an AI Green Energy Optimization Engine with
    both compute orchestration and network control layers to manage workload
    placement and traffic across IP/optical networks and NFVi PoDs or
-   datacenters. {{architecture_for_ai_derive_green}} illustrates this design, showing the AI engine
-   interfacing with an NFV Orchestrator (NFVO) to shift compute jobs (e.g.,
-   VNFs) between PoDs/datacenters based on green energy availability, and
-   optionally with P-PNC and O-PNC for traffic adjustments. The engine
-   collects telemetry and energy data, computes optimal configurations, and
-   applies them via orchestration and controller APIs.
+   datacenters. {{architecture_for_ai_derive_green}} illustrates this design,
+   showing the AI engine interfacing with an NFV Orchestrator (NFVO) to shift
+   compute jobs (e.g., VNFs) between PoDs/datacenters based on green energy
+   availability, and optionally with P-PNC and O-PNC for traffic adjustments.
+   The engine collects telemetry and energy data, computes optimal configurations,
+   and applies them via orchestration and controller APIs.
 
 ~~~~
 
@@ -2010,8 +2011,8 @@ Legend:
 
 * Interfaces and APIs
 
-   Interfaces extend those in {{ai_drive_resilience_testing}} and {{energy_efficiency_optimization}}, with a focus on
-   compute orchestration. The NFVO uses ETSI NFV MANO APIs (e.g., Os-Ma-nfvo
+   Interfaces extend those in {{ai_drive_resilience_testing}} and {{energy_efficiency_optimization}},
+   with a focus on compute orchestration. The NFVO uses ETSI NFV MANO APIs (e.g., Os-Ma-nfvo
    reference point) to instantiate or migrate VNFs across NFVi PoDs/
    datacenters based on green energy availability. NETCONF (RFC 6241) or
    RESTCONF (RFC 8040) manages traffic adjustments via P-PNC/O-PNC when
@@ -2021,8 +2022,8 @@ Legend:
 
 * Protocols
 
-   Protocols align with {{ai_drive_resilience_testing}} and {{energy_efficiency_optimization}}, with additions for compute
-   management. PCEP (RFC 5440) enables traffic rerouting to align with
+   Protocols align with {{ai_drive_resilience_testing}} and {{energy_efficiency_optimization}},
+   with additions for compute management. PCEP (RFC 5440) enables traffic rerouting to align with
    green-energy-powered nodes, while BGP (RFC 4271) or OSPF (RFC 2328)
    adjusts routing paths. OTN (G.709) signaling supports optical
    adjustments if involved. For compute, ETSI NFV protocols (e.g.,
@@ -2032,8 +2033,8 @@ Legend:
 
 * Data Models
 
-   YANG models build on {{ai_drive_resilience_testing}} and {{energy_efficiency_optimization}}, with compute-specific
-   extensions. The Network Topology Model (RFC 8345) can be augmented to
+   YANG models build on {{ai_drive_resilience_testing}} and {{energy_efficiency_optimization}},
+   with compute-specific extensions. The Network Topology Model (RFC 8345) can be augmented to
    include NFVi PoD/datacenter attributes (e.g., energy source, compute
    capacity) and metrics (e.g., carbon footprint, latency). OpenConfig
    models for interfaces and ETSI NFV YANG models (e.g., for VNF
@@ -2062,8 +2063,8 @@ Legend:
    The Traffic Engineering Architecture and Signaling (TEAS) working
    groups efforts (e.g., RFC 8453 for ACTN) enable green-energy-aware
    routing. Extensions to YANG (NETMOD), PCEP (PCE), and telemetry
-   standards (OPSAWG) could standardize this, leveraging {{ai_drive_resilience_testing}} and {{energy_efficiency_optimization}}
-   frameworks.
+   standards (OPSAWG) could standardize this, leveraging {{ai_drive_resilience_testing}}
+   and {{energy_efficiency_optimization}} frameworks.
 
 ## AI-Driven Policy Enforcement and Compliance Auditing
 
@@ -2088,9 +2089,9 @@ Legend:
 
    The architecture integrates an AI Policy Enforcement and Compliance
    Engine with network controllers, security systems, and orchestration
-   platforms. {{architecture_for_ai_derive_policy_enforcement}} illustrates this design, showing the AI engine
-   interfacing with P-PNC, O-PNC and Security Information and
-   Event Management (SIEM) systems. The engine collects telemetry,
+   platforms. {{architecture_for_ai_derive_policy_enforcement}} illustrates
+   this design, showing the AI engine interfacing with P-PNC, O-PNC and Security
+   Information and Event Management (SIEM) systems. The engine collects telemetry,
    enforces policies, and audits compliance, applying corrective actions
    via controller APIs.
 
@@ -2169,7 +2170,8 @@ Legend:
    Security Area Working Group (SEC) addresses policy enforcement.
    Extensions to YANG (NETMOD), PCEP (PCE), and telemetry standards
    (OPSAWG) could standardize this use case, leveraging frameworks
-   proposed in {{ai_drive_resilience_testing}} and {{energy_efficiency_optimization}}.
+   proposed in {{ai_drive_resilience_testing}} and
+   {{energy_efficiency_optimization}}.
 
 ## AI-Driven Network Slicing Optimization
 
@@ -2195,11 +2197,12 @@ Legend:
    The architecture integrates an AI Network Slicing Optimization Engine
    with the NSMF (Network Slice Management Function) and NSSMFs (Network
    Slice Subnet Management Functions) for RAN, Core, and Transport
-   domains. {{architecture_for_ai_derive_5g_ns}} illustrates this design, showing the AI engine
-   interfacing with the NSMF, which coordinates with the NSSMFs to
-   manage and optimize network slices. The engine collects telemetry,
-   predicts SLA violations, and provides optimization recommendations to
-   the NSMF, which implements changes via the NSSMFs.
+   domains. {{architecture_for_ai_derive_5g_ns}} illustrates this
+   design, showing the AI engine interfacing with the NSMF, which
+   coordinates with the NSSMFs to manage and optimize network slices.
+   The engine collects telemetry, predicts SLA violations, and provides
+   optimization recommendations to the NSMF, which implements changes via
+   the NSSMFs.
 
 ~~~~
 
@@ -2281,10 +2284,11 @@ Legend:
    efforts in network management and traffic engineering. The Operations
    and Management Area Working Group (OPSAWG) supports telemetry for
    slice performance metrics, while the Traffic Engineering Architecture
-   and Signaling (TEAS) working group’s work on path optimization (e.g.,
+   and Signaling (TEAS) working group's work on path optimization (e.g.,
    RFC 8453 for ACTN) enables slice-aware routing. Extensions to YANG
    (NETMOD), PCEP (PCE), and telemetry standards (OPSAWG) could
-   standardize this use case, leveraging frameworks proposed in {{ai_drive_resilience_testing}} and
+   standardize this use case, leveraging frameworks proposed in
+   {{ai_drive_resilience_testing}} and
    {{energy_efficiency_optimization}}.
 
 
@@ -2312,6 +2316,10 @@ To be added.
 * Alignment with IETF
 
 To be added.
+
+# Security Considerations
+
+To be discussed in future versions of this document.
    
 --- back
 
