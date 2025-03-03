@@ -91,7 +91,7 @@ protocols to support AINetOps-driven network management.
 
 The increasing complexity of modern networks has driven the need for
 innovative approaches to network operations and management. Artificial
-Intelligence for Network Operations (AINetOps) has emerged as a
+Intelligence for Network Operations (AINetOps) has emerged as an
 innovative concept, leveraging artificial intelligence (AI) and
 machine learning (ML) to automate, enhance, and optimize network
 management tasks. AINetOps offers the potential to reduce operational
@@ -130,7 +130,7 @@ optimal performance and reliability of many network environments. The applicabil
 of Artificial Intelligence is well-established, and the use cases are outlined
 in this document. 
 
-Editors note: Future versions of this document will include will include prior
+Editors note: Future versions of this document will include prior
 IRTF and IETF work.
 
 # Conventions and Definitions
@@ -235,7 +235,7 @@ resources across different network layers, such as IP and optical layers.
    This draft introduces the term “Operational Benefit”, which
    encompasses the comprehensive suite of tools, and methodologies that
    facilitate the efficient management, debugging, troubleshooting,
-   monitoring, configuration, and optimization of IP Optical networks.
+   monitoring, configuration, and optimizing of IP Optical networks.
    These operational benefits might include network management systems,
    automated diagnostic tools, performance monitoring and telemetry
    systems, configuration management platforms, and optimization
@@ -1088,7 +1088,7 @@ For every use case described, the following dimensions are examined to provide a
 
    Unlike reactive and active assurance, proactive assurance does not wait for a fault to occur in the IP/Optical network. Instead, the network is continuously monitored through a series of trending and forecasting processes designed to detect early signs of deterioration that may eventually lead to faults.
     
-   As illustrated in {{figure-proactive-assurance}}, achieving proactive assurance involves running multiple processes that continuously monitor network performance. These processes collect and analyze a wide array of network telemetry data-including performance monitoring (PM) data, alarms, logs, network topology, and inventory details (Step A). By employing various techniques including advanced AI/ML algorithms, these processes provide real-time trending and forecasting insights, identifying patterns and anomalies that could indicate potential degradation (Step B).
+   As illustrated in {{figure-proactive-assurance}}, achieving proactive assurance involves running multiple processes that continuously monitor network performance. These processes collect and analyze a wide array of network telemetry data, including performance monitoring (PM) data, alarms, logs, network topology, and inventory details (Step A). By employing various techniques including advanced AI/ML algorithms, these processes provide real-time trending and forecasting insights, identifying patterns and anomalies that could indicate potential degradation (Step B).
     
    When these background processes detect any signs of deterioration or anomalous behavior, they trigger the AIOps-Assistant for further investigation (Step C). The AIOps-Assistant then leverages a Gen-AI multi-agent framework to initiate the assurance and troubleshooting procedures. In Step D, a dynamic workflow is executed to thoroughly diagnose the emerging issue and identify potential root causes. Optionally, at Step E, the Gen-AI dynamic workflow can recommend remedial actions to resolve the identified issues. These recommendations can be implemented in a closed-loop fashion, ensuring automated network recovery and continuous improvement of network performance. This proactive approach not only mitigates the risk of unexpected network faults but also optimizes operational efficiency by addressing issues before they escalate into service-impacting events.
     
