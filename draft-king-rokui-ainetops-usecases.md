@@ -665,13 +665,16 @@ Section 5.4.1 and "Operational Insights Requiring Further Analysis
    decisions to optimize resource allocation and improve overall
    efficiency.  This insight is particularly valuable in multi-layer IP/
    Optical networks, where the interplay between different network
-   layers can be complex.  By leveraging these insights, operators can
+   layers can be complex. {{!RFC5557}} provides examples of the PCE 
+   being using to optimize resource allocation. 
+   
+   By leveraging these insights, operators can
    ensure that both the IP and optical layers are operating
    harmoniously, leading to optimal performance and cost efficiency.  In
    essence, Network Operational Insights empower operators with the
    knowledge needed to maintain a high-performing, resilient, and
    future-proof network infrastructure.
-  
+   
    The network operational insight can be grouped into two categories.
    By categorizing network operational insights into these two
    categories, operators can better prioritize their efforts and
@@ -1178,9 +1181,9 @@ For every use case described, the following dimensions are examined to provide a
 
    To facilitate interoperability and integration with existing network management systems, the following interfaces and APIs are recommended:
    
-   * Northbound API: Provides a standardized interface for external systems to query anomaly detection results and receive alerts.This API should align with RESTCONF (RFC 8040) for consistency with IETF standards.
-   * Southbound API: Allows the anomaly detection system to interact with network devices for data collection and response actions. This API may use NETCONF (RFC 6241) or RESTCONF (RFC 8040) for device management.
-   * Model Management API: Enables the deployment, updating, and monitoring of AI models used in the analysis layer. This API should support secure communication as defined in RFC 8446 (TLS 1.3).
+   * Northbound API: Provides a standardized interface for external systems to query anomaly detection results and receive alerts.This API should align with RESTCONF {{!RFC8040}} for consistency with IETF standards.
+   * Southbound API: Allows the anomaly detection system to interact with network devices for data collection and response actions. This API may use NETCONF {{!RFC6241}} or RESTCONF {{!RFC8040}} for device management.
+   * Model Management API: Enables the deployment, updating, and monitoring of AI models used in the analysis layer. This API should support secure communication as defined in {{!RFC8446}} (TLS 1.3).
 
    These APIs should adhere to RESTful principles or other widely adopted standards to ensure ease of integration.
 
@@ -1224,9 +1227,9 @@ For every use case described, the following dimensions are examined to provide a
 
    The following protocols are suggested for communication between the components of the anomaly detection system:
    
-   * NETCONF/RESTCONF: For configuring and managing network devices and retrieving operational data, as defined in RFC 6241 and RFC 8040.
-   * gRPC/HTTP2: For high-performance communication between the analysis layer and other components, leveraging HTTP/2 (RFC 7540) for efficient data transfer.
-   * MQTT: For lightweight, publish-subscribe messaging between distributed components, particularly in IoT environments, as specified in RFC 7252 (CoAP) or MQTT 5.0 (OASIS Standard).
+   * NETCONF/RESTCONF: For configuring and managing network devices and retrieving operational data, as defined in {{!RFC6241}} and {{!RFC8040}}.
+   * gRPC/HTTP2: For high-performance communication between the analysis layer and other components, leveraging HTTP/2 {{!RFC7540}}) for efficient data transfer.
+   * MQTT: For lightweight, publish-subscribe messaging between distributed components, particularly in IoT environments, as specified in {{!RFC7252}} (CoAP) or MQTT 5.0 (OASIS Standard).
 
    The choice of protocol should consider factors such as latency, bandwidth, and security requirements.
 
@@ -1234,9 +1237,9 @@ For every use case described, the following dimensions are examined to provide a
 
    Data models for network anomaly detection should be designed to capture both the structure and semantics of network traffic data. The following models are recommended:
    
-   * YANG Data Models: For representing network configuration and state data in a structured format, as defined in RFC 7950 and extended by RFC 8345 for network topologies.
-   * JSON/XML Schemas: For defining the format of data exchanged between components via APIs, consistent with RFC 8259 (JSON) and RFC 7303 (XML).
-   * Feature Vectors: For representing the input data to AI models, which may include packet headers, flow statistics, and behavioral patterns. These vectors should align with the IPFIX Information Model (RFC 7012) for flow data representation.
+   * YANG Data Models: For representing network configuration and state data in a structured format, as defined in {{!RFC7950}} and extended by {{!RFC8345}} for network topologies.
+   * JSON/XML Schemas: For defining the format of data exchanged between components via APIs, consistent with {{!RFC8259}} (JSON) and {{!RFC7303}} (XML).
+   * Feature Vectors: For representing the input data to AI models, which may include packet headers, flow statistics, and behavioral patterns. These vectors should align with the IPFIX Information Model {{!RFC7012}} for flow data representation.
 
    These data models should be extensible to accommodate new types of network data and evolving AI techniques.
 
@@ -1244,9 +1247,9 @@ For every use case described, the following dimensions are examined to provide a
 
    The development of AI-based network anomaly detection systems should align with existing IETF standards and working groups, such as:
    
-   * NETMOD (Network Modeling): For leveraging YANG data models (RFC 7950, RFC 8345) and NETCONF/RESTCONF protocols (RFC 6241, RFC 8040).
-   * MILE (Managed Incident Lightweight Exchange, concluded): For standardizing the exchange of security incident information, as outlined in RFC 8329.
-   * DOTS (DDoS Open Threat Signaling ,concluded): For coordinating responses to distributed denial-of-service attacks, as defined in RFC 8811.
+   * NETMOD (Network Modeling): For leveraging YANG data models {{!RFC7950}}, {{!RFC8345}} and NETCONF/RESTCONF protocols {{!RFC8040}}.
+   * MILE (Managed Incident Lightweight Exchange, concluded): For standardizing the exchange of security incident information, as outlined in {{!RFC8329}}.
+   * DOTS (DDoS Open Threat Signaling ,concluded): For coordinating responses to distributed denial-of-service attacks, as defined in {{!RFC8811}}.
    * Awaiting to add more WGs, BGP-LS, PCE, etc.
 
    Collaboration with these groups ensures that the anomaly detection system integrates seamlessly with existing IETF frameworks and contributes to the broader goal of network security and management.
